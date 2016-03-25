@@ -50,7 +50,7 @@ public class Main
 //			System.out.print(b + ".");
 //		
 
-//skuska
+
 
 
 
