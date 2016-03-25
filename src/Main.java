@@ -13,10 +13,10 @@ public class Main
 {
     public static void main(String[] args)
     {
-        for (int a: getaddress())
-        {
-            System.out.println(a);
-        }
+//        for (int a: getAddress())
+//        {
+//            System.out.println(a);
+//        }
       //skuska z dec do bin
 //		for(int a : fromDecToBin(2))
 //		{
@@ -38,10 +38,10 @@ public class Main
 //		System.out.println(fromMaskToPrefix(maska));
 		
 		//skuska z prefixu na vildcard
-		for(int a : fromPrefixToVildcard(24))
-		{
-			System.out.print(a + ".");
-		}
+//		for(int a : fromPrefixToVildcard(24))
+//		{
+//			System.out.print(a + ".");
+//		}
 		
 		//skuska z masky na vildcard
 //		int[] p = {255,255,255,0};
@@ -50,13 +50,17 @@ public class Main
 //			System.out.print(b + ".");
 //		
 
-//skuska
+        //skuska z adresy na dajaku adresu
+        for(int a : getNetOrBroAddress(getAddress(),32,true))
+        {
+        	System.out.print(a + ".");
+        }
 
 
 
     }
     //metod for get IPv4 address from user in console
-	public static int[] getaddress()
+	public static int[] getAddress()
     {
 		@SuppressWarnings("resource")
 		Scanner kb = new Scanner(System.in);
@@ -70,13 +74,13 @@ public class Main
             else
             {
             	System.out.println("Zadaj adresu so štyrmi oktetmi");
-            	return getaddress();
+            	return getAddress();
             }
         }
         catch (Exception e)
         {
             System.out.println("Zadaj iba èísla");
-            return getaddress();
+            return getAddress();
         }
 
     }
@@ -93,6 +97,19 @@ public class Main
             ex = ex / 2;
         }
         return bin;
+    }
+    // specialna metoda na pocitanie z desiatkovej do binarnej (8 bitov) sústavy
+    public static int[] fromDecToBin8(int dec)
+    {
+    	int[] bin = fromDecToBin(dec);
+    	int[] out = new int[8];
+    	int read = 0;
+    	for(int i = 8 - bin.length; i < out.length; i++)
+    	{
+    		out[i] = bin[read];
+    		read++;
+    	}
+    	return out;
     }
     // metoda na pocitanie z binárnej sústavy do desiatkovej
     public static int fromBinToDec(int[] bin)
@@ -169,6 +186,42 @@ public class Main
         }
         return vildcard;
     }
+    // metoda na ziskanie sietovej alebo broadcastovej adresy
+    public static int[] getNetOrBroAddress(int[] address,int prefix,boolean net)
+    {
+    	if(prefix == 32)
+    		return address;
+    	int[] octet1 = fromDecToBin8(address[0]);
+    	int[] octet2 = fromDecToBin8(address[1]);
+    	int[] octet3 = fromDecToBin8(address[2]);
+    	int[] octet4 = fromDecToBin8(address[3]);
+    	int fromThisPrefix = (prefix == 32) ? 4 : prefix / 8 + 1; 	// vypocita v ktorom oktete sa zaèinaju meni 0/1 
+    	int border = prefix - (prefix / 8)*8;						// hranica zmeny 0/1 v prvom upravujucom sa oktete
+    	
+    	changeOctet(octet1, fromThisPrefix, 1, border, net);
+    	changeOctet(octet2, fromThisPrefix, 2, border, net);
+    	changeOctet(octet3, fromThisPrefix, 3, border, net);
+    	changeOctet(octet4, fromThisPrefix, 4, border, net);
+    	
+    	int[] outAddress = new int[4];
+    	outAddress[0] = fromBinToDec(octet1);
+    	outAddress[1] = fromBinToDec(octet2);
+    	outAddress[2] = fromBinToDec(octet3);
+    	outAddress[3] = fromBinToDec(octet4);
+    	return outAddress;
+    }
+    // metoda na opravu octetu pre getNetOrBroAddress
+    public static void changeOctet(int[] octet,int fromThisPrefix,int numOctet,int border,boolean net)
+    {
+    	if(fromThisPrefix <= numOctet)			// numOctet - cislo prave upravujuceho sa oktetu
+    	{
+    		border = (fromThisPrefix == numOctet) ? border : 0;
+    		for(int i = border;i < 8;i++)
+    		{
+    			octet[i] = (net) ? 0 : 1;		// menia sa 1/0
+    		}
+    	}
+    }
     // mocninátor
     public static int mocnenie(int zaklad,int index)
     {
@@ -196,6 +249,7 @@ public class Main
             }
         }
     }
+    // metoda ktora uroby zo String pola int pole
     public static int[] stringArrayToIntArray(String[] array)
     {
         int[] arrayint = new int[array.length];
