@@ -17,16 +17,49 @@ public class Main
         {
             System.out.println(a);
         }
-
+      //skuska z dec do bin
+//		for(int a : fromDecToBin(2))
+//		{
+//			System.out.print(a);
+//		}
+		
+		//skuska z bin do dec
+//		int[] pole = {1,1,1,1,1,1,1,1};
+//		System.out.println(fromBinToDec(pole));
+		
+		//skuska prefix do masky
+//		for(int a : fromPrefixToMask(24))
+//		{
+//			System.out.print(a+".");
+//		}
+		
+		//skuska maska do prefix
+//		int[] maska = {255,192,0,0};
+//		System.out.println(fromMaskToPrefix(maska));
+		
+		//skuska z prefixu na vildcard
+		for(int a : fromPrefixToVildcard(24))
+		{
+			System.out.print(a + ".");
+		}
+		
+		//skuska z masky na vildcard
+//		int[] p = {255,255,255,0};
+//		for(int b : fromMaskToVildcard(p))
+//		{
+//			System.out.print(b + ".");
+//		
 
 
 
 
 
     }
-    public static int[] getaddress()
+    //metod for get IPv4 address from user in console
+	public static int[] getaddress()
     {
-        Scanner kb = new Scanner(System.in);
+		@SuppressWarnings("resource")
+		Scanner kb = new Scanner(System.in);
         String [] inout = kb.nextLine().split("\\.");
         try {
             int[] address = stringArrayToIntArray(inout);
@@ -81,16 +114,16 @@ public class Main
     // metoda na prevod z prefixu na masku
     public static int[] fromPrefixToMask(int prefix)
     {
-        int[] mask = new int[4];  // vysledna maska
-        int full = prefix / 8;
+        int[] mask = new int[4];  	// pole v ktorej je ulozena vysledna maska
+        int full = prefix / 8;		// zistuje kolko octetov bude 255
         for(int i = 0; i < full;i++)
         {
             mask[i] = 255;
         }
         if(full < 4)
         {
-            prefix = prefix - (full*8);
-            int[] activeOctet = new int[8];
+            prefix = prefix - (full*8);		//od  celkoveho prefixu odpocita octety ktore uz su 255
+            int[] activeOctet = new int[8];	// pole v ktorom su ulozene jednotky zvisneho prefixu
             for(int i = 0; i < prefix;i++)
             {
                 activeOctet[i] = 1;
@@ -104,10 +137,10 @@ public class Main
     public static int fromMaskToPrefix(int[] mask)
     {
         int prefix = 0;                     // prefix
-        for(int i = 0; i < mask.length;i++)
+        for(int i = 0; i < mask.length;i++)	//prechadza oktety masky
         {
-            int[] pole = fromDecToBin(mask[i]);
-            for(int a = 0; a < pole.length;a++)
+            int[] pole = fromDecToBin(mask[i]);	// oktet masky sa konvertuje na bin cislo
+            for(int a = 0; a < pole.length;a++)	// cyklus zistuje kolko jednotiek sa nachádza v danom oktete
             {
                 if(pole[a] == 1)
                     prefix++;
@@ -120,9 +153,9 @@ public class Main
     // metoda ktora z prefixu uroby vildcard
     public static int[] fromPrefixToVildcard(int prefix)
     {
-        int[] vildcard = new int[4];       // pole v ktorom je ulozeny vildcard
-        int[] maska = fromPrefixToMask(prefix);   // pole v ktorom je konvertovany prefix na masku
-        return fromMaskToVildcard(maska);
+    	int[] maska = fromPrefixToMask(prefix);         // pole v ktorom je konvertovany prefix na masku
+		int[] vildcard = fromMaskToVildcard(maska);     // pole v ktorom je ulozeny vildcard
+		return fromMaskToVildcard(maska);
     }
     // metoda ktora z masky uroby vildcard
     public static int[] fromMaskToVildcard(int[] maska)
