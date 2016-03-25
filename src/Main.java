@@ -155,7 +155,7 @@ public class Main
     {
     	int[] maska = fromPrefixToMask(prefix);         // pole v ktorom je konvertovany prefix na masku
 		int[] vildcard = fromMaskToVildcard(maska);     // pole v ktorom je ulozeny vildcard
-		return fromMaskToVildcard(maska);
+		return vildcard;
     }
     // metoda ktora z masky uroby vildcard
     public static int[] fromMaskToVildcard(int[] maska)
