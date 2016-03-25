@@ -36,12 +36,13 @@ public class Main
             }
             else
             {
-                return new int[4];
+            	System.out.println("Zadaj adresu so štyrmi oktetmi");
+            	return getaddress();
             }
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("Zadaj iba èísla");
             return getaddress();
         }
 
