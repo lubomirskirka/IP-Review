@@ -51,10 +51,20 @@ public class Main
 //		
 
         //skuska z adresy na dajaku adresu
-        for(int a : getNetOrBroAddress(getAddress(),32,true))
-        {
-        	System.out.print(a + ".");
-        }
+//        for(int a : getNetOrBroAddress(getAddress(),32,true))
+//        {
+//        	System.out.print(a + ".");
+//        }
+    	
+    	// skuska metody na pocet adries
+//    	int a = getSpaceAddress(3);
+//    	System.out.println(a);
+    	
+    	// skuska metody na prvu a poskednu adresu
+    	for(int a : getFirstOrLastAddress(getAddress(),20,false))
+    	{
+    		System.out.print(a + ".");
+    	}
 
 
 
@@ -221,6 +231,24 @@ public class Main
     			octet[i] = (net) ? 0 : 1;		// menia sa 1/0
     		}
     	}
+    }
+    // metoda na zisùovanie poËtu adries
+    public static int getSpaceAddress(int prefix)
+    {
+    	int spaceAddress;
+    	spaceAddress = mocnenie(2,32 - prefix);
+    	return spaceAddress;	
+    }
+    // metoda na zistenie prvej a poslednej pouûiteænej adresy
+    public static int[] getFirstOrLastAddress(int[] address,int prefix,boolean or)
+    {
+    	int[] net = getNetOrBroAddress(address,prefix,true);     // v tomto poli je ulozena
+    	int[] bro = getNetOrBroAddress(address,prefix,false);
+    	
+    	net[3]++;
+    	bro[3]--;
+    	
+    	return (or) ? net : bro;
     }
     // mocnin·tor
     public static int mocnenie(int zaklad,int index)
