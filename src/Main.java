@@ -35,7 +35,7 @@ public class Main
                     convertUI(true, 0, 0);
                     break;
                 case 2:
-                    System.out.println("    2 Maska/Prefix");
+                    prefixUI(true, 0, 0);
                     break;
                 case 3:
                     System.out.println("    3 IP Review");
@@ -62,13 +62,13 @@ public class Main
                 u = 0;
                 if(y == 2)
                 {
-                    System.out.println("    " + "1" + " Binarna");
+                    System.out.println("    1 Binarna");
                     u = kb2.nextInt();
                     u = 1;
                 }
                 if(y == 1)
                 {
-                    System.out.println("    " + "1" + " Decimálna");
+                    System.out.println("    1 Decimálna");
                     u = kb2.nextInt();
                     u = 2;
                 }
@@ -128,7 +128,121 @@ public class Main
             System.out.println();
         }
     }
-    
+    public static void prefixUI(boolean que, int y, int u)
+    {
+        while(true)
+        {
+            Scanner kb2 = new Scanner(System.in);
+            if (que)
+            {
+                System.out.println("Konvertovať z:");
+                System.out.println("    1 Prefix");
+                System.out.println("    2 Maska");
+                y = kb2.nextInt();
+                System.out.println("Konvertovať do:");
+                u = 0;
+                if(y == 1)
+                {
+                    System.out.println("    1 Maska");
+                    System.out.println("    2 Wildcard");
+                    u = kb2.nextInt();
+
+                }
+                if(y == 2)
+                {
+                    System.out.println("    1 Prefix");
+                    System.out.println("    2 Wildcard");
+                    u = kb2.nextInt();
+                    if (u == 1)
+                        u = 3;
+                }
+                System.out.println();
+            }
+
+            switch (y)
+            {
+                case 1:
+                    if(u == 1)
+                    {
+                        while (true)
+                        {
+                            System.out.print("Zadaj prefix: ");
+                            int in = kb2.nextInt();
+                            if (in >= 0 && in <= 32)
+                            {
+                                System.out.print("Maska je: ");
+                                int[] mask = fromPrefixToMask(in);
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    System.out.print(mask[i]);
+                                    if (i != 3)
+                                        System.out.print(".");
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                System.out.println("Zlý prefix");
+                            }
+                        }
+                    }
+                    if(u == 2)
+                    {
+                        while (true)
+                        {
+                            System.out.print("Zadaj Prefix: ");
+                            int in = kb2.nextInt();
+                            if (in >= 0 && in <= 32)
+                            {
+                                System.out.print("Wildcard je: ");
+                                int[] wildcard = fromPrefixToVildcard(in);
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    System.out.print(wildcard[i]);
+                                    if (i != 3)
+                                        System.out.print(".");
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                System.out.println("Zlý prefix");
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Zlý vstup");
+                    convertUI(true, 0, 0);
+            }
+            kb2.nextLine();
+
+            System.out.println();
+            System.out.println();
+
+            System.out.println("Čo chceš robiť? Pokračovať s nastaveným prevodom = Enter  Nový prevod = 0  Menu = 1");
+            String back = kb2.nextLine();
+            try {
+                int in = Integer.parseInt(back);
+                if(in == 0)
+                {
+                    prefixUI(true, 0, 0);
+                }
+                if (in == 1)
+                {
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                prefixUI(false,y,u);
+            }
+            System.out.println();
+            System.out.println();
+        }
+    }
     //metod for get IPv4 address from user in console
 	public static int[] getAddress()
     {
