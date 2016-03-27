@@ -13,66 +13,122 @@ public class Main
 {
     public static void main(String[] args)
     {
-  /*      System.out.println("Vitajte v aplikácii Počty");
-        menu(); */
-        String h = "101010110";
-        int[] p = getBinNum();
-        for (int k : p)
-            System.out.println(k);
+        System.out.println("Vitajte v aplikácii Počty");
+        menu();
     }
     public static void menu()
     {
-        Scanner kb = new Scanner(System.in);
-
-        System.out.println("Funkcie:");
-        System.out.println("    1 Prevod medzi sústavami");
-        System.out.println("    2 Maska/Prefix");
-        System.out.println("    3 IP Review");
-        System.out.print("Vyberte funkciu: ");
-        int y = kb.nextInt();
-
-        switch (y)
+        while (true)
         {
-            case 1:
-                convertUI();
-                break;
-            case 2:
-                System.out.println("    2 Maska/Prefix");
-                break;
-            case 3:
-                System.out.println("    3 IP Review");
-                break;
-            default:
-                System.out.println("Zadaj číslo fukcie");
-                menu();
-                break;
+            Scanner kb = new Scanner(System.in);
 
+            System.out.println("Funkcie:");
+            System.out.println("    1 Prevod medzi sústavami");
+            System.out.println("    2 Maska/Prefix");
+            System.out.println("    3 IP Review");
+            System.out.print("Vyberte funkciu: ");
+            int y = kb.nextInt();
+            System.out.println();
+            switch (y)
+            {
+                case 1:
+                    convertUI(true, 0, 0);
+                    break;
+                case 2:
+                    System.out.println("    2 Maska/Prefix");
+                    break;
+                case 3:
+                    System.out.println("    3 IP Review");
+                    break;
+                default:
+                    System.out.println("Zadaj číslo fukcie");
+                    menu();
+                    break;
+            }
         }
     }
-    public static void convertUI()
+    public static void convertUI(boolean que, int y, int u)
     {
-        Scanner kb2 = new Scanner(System.in);
-        System.out.println("Z ktorej sústavy chceš prevádzať:");
-        System.out.println("    1 Binarna");
-        System.out.println("    2 Decimálna");
-        int y = kb2.nextInt();
-        System.out.println("Do ktorej sústavy chceš prevádzať:");
-        System.out.println("    1 Binarna");
-        System.out.println("    2 Decimálna");
-        int u = kb2.nextInt();
-        switch (y)
+        while(true)
         {
-            case 1:
-                System.out.print("Zadaj binarne číslo: ");
-                break;
-            case 2:
-                System.out.print("Zadaj decimalne číslo: ");
-                break;
-            default:
-                System.out.println("Zlý vstup");
-                convertUI();
+            Scanner kb2 = new Scanner(System.in);
+            if (que)
+            {
+                System.out.println("Z ktorej sústavy chceš prevádzať:");
+                System.out.println("    1 Binarna");
+                System.out.println("    2 Decimálna");
+                y = kb2.nextInt();
+                System.out.println("Do ktorej sústavy chceš prevádzať:");
+                u = 0;
+                if(y == 2)
+                {
+                    System.out.println("    " + "1" + " Binarna");
+                    u = kb2.nextInt();
+                    u = 1;
+                }
+                if(y == 1)
+                {
+                    System.out.println("    " + "1" + " Decimálna");
+                    u = kb2.nextInt();
+                    u = 2;
+                }
+                System.out.println();
+            }
+
+            switch (y)
+            {
+                case 1:
+                    if(u == 2)
+                    {
+                        System.out.print("Zadaj binarne číslo: ");
+                        int[] in = getBinNum();
+                        System.out.println("Zadané číslo v desiatkovej sústave je: " + fromBinToDec(in));
+                    }
+                    break;
+                case 2:
+                    if(u == 1)
+                    {
+                        System.out.print("Zadaj decimalne číslo: ");
+                        int in = kb2.nextInt();
+                        System.out.print("Zadané číslo v binárnej sústave je: ");
+                        for (int x : fromDecToBin(in))
+                        {
+                            System.out.print(x);
+                        }
+                    }
+
+                    break;
+                default:
+                    System.out.println("Zlý vstup");
+                    convertUI(true, 0, 0);
+            }
+            kb2.nextLine();
+
+            System.out.println();
+            System.out.println();
+
+            System.out.println("Čo chceš robiť? Pokračovať s nastaveným prevodom = Enter  Nový prevod = 0  Menu = 1");
+            String back = kb2.nextLine();
+            try {
+                int in = Integer.parseInt(back);
+                if(in == 0)
+                {
+                   convertUI(true, 0, 0);
+                }
+                if (in == 1)
+                {
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                convertUI(false,y,u);
+            }
+            System.out.println();
+            System.out.println();
         }
     }
+    
     //metod for get IPv4 address from user in console
 	public static int[] getAddress()
     {
@@ -100,11 +156,11 @@ public class Main
     public static int[] getBinNum()
     {
         Scanner kb3 = new Scanner(System.in);
-        String array = kb3.nextLine();
-        String[] inout = new String[array.length()];
-        for (int i = 0; i < array.length(); i++)
+        String in = kb3.nextLine();
+        String[] inout = new String[in.length()];
+        for (int i = 0; i < in.length(); i++)
         {
-            String character = array.substring(i,i+1);
+            String character = in.substring(i,i+1);
             inout[i] = character;
         }
         return stringArrayToIntArray(inout);

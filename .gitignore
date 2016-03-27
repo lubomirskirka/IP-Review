@@ -64,3 +64,4 @@ $RECYCLE.BIN/
 /bin/
 *.xml
 PoctyJava.iml
+src/META-INF/MANIFEST.MF
