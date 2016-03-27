@@ -1,9 +1,9 @@
 /*
  * 
- * Autory :   Migaš Šimon
- * 			  Skirka ¼ubomír
- * 			  Sokol Kristián
- * 			  Stankoviè Tomáš
+ * Autory :   Migaï¿½ ï¿½imon
+ * 			  Skirka ï¿½ubomï¿½r
+ * 			  Sokol Kristiï¿½n
+ * 			  Stankoviï¿½ Tomï¿½
  * 
  */
 
@@ -13,61 +13,62 @@ public class Main
 {
     public static void main(String[] args)
     {
-//        for (int a: getAddress())
-//        {
-//            System.out.println(a);
-//        }
-      //skuska z dec do bin
-//		for(int a : fromDecToBin(2))
-//		{
-//			System.out.print(a);
-//		}
-		
-		//skuska z bin do dec
-//		int[] pole = {1,1,1,1,1,1,1,1};
-//		System.out.println(fromBinToDec(pole));
-		
-		//skuska prefix do masky
-//		for(int a : fromPrefixToMask(24))
-//		{
-//			System.out.print(a+".");
-//		}
-		
-		//skuska maska do prefix
-//		int[] maska = {255,192,0,0};
-//		System.out.println(fromMaskToPrefix(maska));
-		
-		//skuska z prefixu na vildcard
-//		for(int a : fromPrefixToVildcard(24))
-//		{
-//			System.out.print(a + ".");
-//		}
-		
-		//skuska z masky na vildcard
-//		int[] p = {255,255,255,0};
-//		for(int b : fromMaskToVildcard(p))
-//		{
-//			System.out.print(b + ".");
-//		
+        System.out.println("Vitajte v aplikÃ¡cii PoÄty");
+        menu();
 
-        //skuska z adresy na dajaku adresu
-//        for(int a : getNetOrBroAddress(getAddress(),32,true))
-//        {
-//        	System.out.print(a + ".");
-//        }
-    	
-    	// skuska metody na pocet adries
-//    	int a = getSpaceAddress(3);
-//    	System.out.println(a);
-    	
-    	// skuska metody na prvu a poskednu adresu
-    	for(int a : getFirstOrLastAddress(getAddress(),20,false))
-    	{
-    		System.out.print(a + ".");
-    	}
+    }
+    public static void menu()
+    {
+        Scanner kb = new Scanner(System.in);
 
+        System.out.println("Funkcie:");
+        System.out.println("    1 Prevod medzi sÃºstavami");
+        System.out.println("    2 Maska/Prefix");
+        System.out.println("    3 IP Review");
+        System.out.print("Vyberte funkciu: ");
+        int y = kb.nextInt();
 
+        switch (y)
+        {
+            case 1:
+                convertUI();
+                break;
+            case 2:
+                System.out.println("    2 Maska/Prefix");
+                break;
+            case 3:
+                System.out.println("    3 IP Review");
+                break;
+            default:
+                System.out.println("Zadaj ÄÃ­slo fukcie");
+                menu();
+                break;
 
+        }
+    }
+    public static void convertUI()
+    {
+        Scanner kb2 = new Scanner(System.in);
+        System.out.println("Z ktorej sÃºstavy chceÅ¡ prevÃ¡dzaÅ¥:");
+        System.out.println("    1 Binarna");
+        System.out.println("    2 DecimÃ¡lna");
+        int y = kb2.nextInt();
+        System.out.println("Do ktorej sÃºstavy chceÅ¡ prevÃ¡dzaÅ¥:");
+        System.out.println("    1 Binarna");
+        System.out.println("    2 DecimÃ¡lna");
+        int u = kb2.nextInt();
+        switch (y)
+        {
+            case 1:
+                System.out.print("Zadaj binarne ÄÃ­slo: ");
+                break;
+            case 2:
+                System.out.print("Zadaj decimalne ÄÃ­slo: ");
+                break;
+            default:
+                System.out.println("ZlÃ½ vstup");
+                convertUI();
+        }
     }
     //metod for get IPv4 address from user in console
 	public static int[] getAddress()
@@ -83,18 +84,18 @@ public class Main
             }
             else
             {
-            	System.out.println("Zadaj adresu so štyrmi oktetmi");
+            	System.out.println("Zadaj adresu so ï¿½tyrmi oktetmi");
             	return getAddress();
             }
         }
         catch (Exception e)
         {
-            System.out.println("Zadaj iba èísla");
+            System.out.println("Zadaj iba ï¿½ï¿½sla");
             return getAddress();
         }
 
     }
-    // metoda na pocitanie z desiatkovej do binarnej sústavy
+    // metoda na pocitanie z desiatkovej do binarnej sï¿½stavy
     public static int[] fromDecToBin(int dec)
     {
         int bits = bits(dec);       // premena v ktorej je ulozeny pocet bitov daneho dec cisla
@@ -108,7 +109,7 @@ public class Main
         }
         return bin;
     }
-    // specialna metoda na pocitanie z desiatkovej do binarnej (8 bitov) sústavy
+    // specialna metoda na pocitanie z desiatkovej do binarnej (8 bitov) sï¿½stavy
     public static int[] fromDecToBin8(int dec)
     {
     	int[] bin = fromDecToBin(dec);
@@ -121,7 +122,7 @@ public class Main
     	}
     	return out;
     }
-    // metoda na pocitanie z binárnej sústavy do desiatkovej
+    // metoda na pocitanie z binï¿½rnej sï¿½stavy do desiatkovej
     public static int fromBinToDec(int[] bin)
     {
         int dec = 0;                                // Vysledne cislo v desiatkovej sustave
@@ -167,7 +168,7 @@ public class Main
         for(int i = 0; i < mask.length;i++)	//prechadza oktety masky
         {
             int[] pole = fromDecToBin(mask[i]);	// oktet masky sa konvertuje na bin cislo
-            for(int a = 0; a < pole.length;a++)	// cyklus zistuje kolko jednotiek sa nachádza v danom oktete
+            for(int a = 0; a < pole.length;a++)	// cyklus zistuje kolko jednotiek sa nachï¿½dza v danom oktete
             {
                 if(pole[a] == 1)
                     prefix++;
@@ -205,7 +206,7 @@ public class Main
     	int[] octet2 = fromDecToBin8(address[1]);
     	int[] octet3 = fromDecToBin8(address[2]);
     	int[] octet4 = fromDecToBin8(address[3]);
-    	int fromThisPrefix = (prefix == 32) ? 4 : prefix / 8 + 1; 	// vypocita v ktorom oktete sa zaèinaju meni 0/1 
+    	int fromThisPrefix = (prefix == 32) ? 4 : prefix / 8 + 1; 	// vypocita v ktorom oktete sa zaï¿½inaju meniï¿½ 0/1 
     	int border = prefix - (prefix / 8)*8;						// hranica zmeny 0/1 v prvom upravujucom sa oktete
     	
     	changeOctet(octet1, fromThisPrefix, 1, border, net);
@@ -232,14 +233,14 @@ public class Main
     		}
     	}
     }
-    // metoda na zisovanie poètu adries
+    // metoda na zisï¿½ovanie poï¿½tu adries
     public static int getSpaceAddress(int prefix)
     {
     	int spaceAddress;
     	spaceAddress = mocnenie(2,32 - prefix);
     	return spaceAddress;	
     }
-    // metoda na zistenie prvej a poslednej pouite¾nej adresy
+    // metoda na zistenie prvej a poslednej pouï¿½iteï¿½nej adresy
     public static int[] getFirstOrLastAddress(int[] address,int prefix,boolean or)
     {
     	int[] net = getNetOrBroAddress(address,prefix,true);     // v tomto poli je ulozena
@@ -250,7 +251,7 @@ public class Main
     	
     	return (or) ? net : bro;
     }
-    // mocninátor
+    // mocninï¿½tor
     public static int mocnenie(int zaklad,int index)
     {
         int out = 0;
@@ -263,7 +264,7 @@ public class Main
         }
         return out;
     }
-    // metoda ktorá zisuje kolko bytov ma jedno èislo
+    // metoda ktorï¿½ zisï¿½uje kolko bytov ma jedno ï¿½islo
     public static int bits(int dec)
     {
         if (dec == 0)
