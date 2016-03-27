@@ -13,9 +13,12 @@ public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("Vitajte v aplikácii Počty");
-        menu();
-
+  /*      System.out.println("Vitajte v aplikácii Počty");
+        menu(); */
+        String h = "101010110";
+        int[] p = getBinNum();
+        for (int k : p)
+            System.out.println(k);
     }
     public static void menu()
     {
@@ -93,7 +96,18 @@ public class Main
             System.out.println("Zadaj iba ��sla");
             return getAddress();
         }
-
+    }
+    public static int[] getBinNum()
+    {
+        Scanner kb3 = new Scanner(System.in);
+        String array = kb3.nextLine();
+        String[] inout = new String[array.length()];
+        for (int i = 0; i < array.length(); i++)
+        {
+            String character = array.substring(i,i+1);
+            inout[i] = character;
+        }
+        return stringArrayToIntArray(inout);
     }
     // metoda na pocitanie z desiatkovej do binarnej s�stavy
     public static int[] fromDecToBin(int dec)
