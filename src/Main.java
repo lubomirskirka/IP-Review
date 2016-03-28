@@ -15,6 +15,7 @@ public class Main
     {
         System.out.println("Vitajte v aplikácii Počty");
         menu();
+    	
     }
     public static void menu()
     {
@@ -283,7 +284,7 @@ public class Main
     public static int[] fromDecToBin(int dec)
     {
         int bits = bits(dec);       // premena v ktorej je ulozeny pocet bitov daneho dec cisla
-        int[] bin = new int[bits];  // pole ktoreho prvkz maju ulozene binarne cislo rovnajuce sa dec
+        int[] bin = new int[bits];  // pole ktoreho prvky maju ulozene binarne cislo rovnajuce sa dec
         int prvok = bits - 1;
         int ex = dec;
         for(;prvok >= 0;prvok--)
@@ -380,6 +381,24 @@ public class Main
             prvok++;
         }
         return vildcard;
+    }
+    // metoda ktora z wildcardu uroby masku
+    public static int[] fromWildcardToMask(int[] wildcard)
+    {
+    	int[] mask = new int[4];            //  pole v ktorom je ulozena maska
+    	
+    	for(int i = 0; i < mask.length;i++)
+    	{
+    		mask[i] = 255 - wildcard[i];
+    	}
+    	return mask;
+    }
+    // metoda ktora z wildcardu uroby prefix
+    public static int fromWildcardToPrefix(int[] wildcard)
+    {
+    	int prefix;
+    	prefix = fromMaskToPrefix(fromWildcardToMask(wildcard));
+    	return prefix;
     }
     // metoda na ziskanie sietovej alebo broadcastovej adresy
     public static int[] getNetOrBroAddress(int[] address,int prefix,boolean net)
