@@ -156,36 +156,25 @@ public class Main
                 System.out.println("Konvertovať z:");
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Maska");
-<<<<<<< HEAD
                 System.out.println("    3 Wildcard");
-                y = kb2.nextInt();
-                System.out.println("Konvertovať do:");
-=======
-                y = kb2.nextInt();								// vyber z moznosti
-                System.out.println("Konvertovať do:");			// zobrazovat sa bude ponuka bez moznosti ktora bola uz vybrana
->>>>>>> Develop
+                y = kb2.nextInt();                      // vyber z moznosti
+                System.out.println("Konvertovať do:");  // zobrazovat sa bude ponuka bez moznosti ktora bola uz vybrana
                 u = 0;
                 if(y == 1)
                 {
                     System.out.println("    1 Maska");
                     System.out.println("    2 Wildcard");
-<<<<<<< HEAD
                     u = kb2.nextInt();
                     if (u < 0 && u > 3)
                     {
                         System.out.println("Zlý vstup");
                         continue;
                     }
-=======
-                    u = kb2.nextInt();							// vyber z moznosti
-
->>>>>>> Develop
                 }
                 if(y == 2)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Wildcard");
-<<<<<<< HEAD
                     u = kb2.nextInt();
                     switch(u)
                     {
@@ -217,11 +206,6 @@ public class Main
                             System.out.println("Zlý vstup");
                             continue;
                     }
-=======
-                    u = kb2.nextInt();							// vzber z moynosti
-                    if (u == 1)
-                        u = 3;
->>>>>>> Develop
                 }
                 System.out.println();
             }
@@ -235,7 +219,7 @@ public class Main
                         {
                             System.out.print("Zadaj prefix: ");
                             int in = kb2.nextInt();
-                            if (in >= 0 && in <= 32)					// prefix musi bit od 0 do 32
+                            if (in >= 0 && in <= 32)
                             {
                                 System.out.print("Maska je: ");
                                 int[] mask = fromPrefixToMask(in);
@@ -254,7 +238,7 @@ public class Main
                         {
                             System.out.print("Zadaj Prefix: ");
                             int in = kb2.nextInt();
-                            if (in >= 0 && in <= 32)					// prefix musi byt od 0 do 32
+                            if (in >= 0 && in <= 32)
                             {
                                 System.out.print("Wildcard je: ");
                                 int[] wildcard = fromPrefixToVildcard(in);
@@ -271,9 +255,9 @@ public class Main
                 case 2:
                     if(u == 3)
                     {
-                            System.out.print("Zadaj masku: ");
-                            int[] in = getAddress();
-                            System.out.println("Prefix je " + fromMaskToPrefix(in));
+                        System.out.print("Zadaj masku: ");
+                        int[] in = getAddress();
+                        System.out.println("Prefix je " + fromMaskToPrefix(in));
                     }
                     if(u == 4)
                     {
@@ -315,16 +299,16 @@ public class Main
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
-                    prefixUI(true, 0, 0);		// od zaciatku
+                    prefixUI(true, 0, 0);
                 }
                 if (in == 1)
                 {
-                    break;						// metoda skonci
+                    break;
                 }
             }
             catch (Exception e)
             {
-                prefixUI(false,y,u);			// predosli prevod
+                prefixUI(false,y,u);
             }
             System.out.println();
             System.out.println();
