@@ -13,8 +13,9 @@ public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("Vitajte v aplikácii");
+        System.out.println("Vitajte v aplikácii ");
         menu();
+        System.out.println("ij");
     	
     }
     public static void menu()
