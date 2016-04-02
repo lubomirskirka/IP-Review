@@ -15,7 +15,8 @@ public class Main
     {
         System.out.println("Vitajte v aplikácii");
         menu();
-    	
+        
+    	System.out.println("najlepsi program");
     }
     public static void menu()
     {
