@@ -44,29 +44,33 @@ public class Main
             switch (y)
             {
                 case 1:
-                    convertUI(true, 0, 0);
+                    convertUI();
                     break;
                 case 2:
-                    prefixUI(true, 0, 0);
+                    prefixUI();
                     break;
                 case 3:
                     ipReviewUI();
                     break;
                 default:
                     System.out.println("Zadaj číslo fukcie");
-                    menu();
-                    break;
+                    continue;
             }
         }
     }
     // metoda ktorá roby 1.prevod medzy sústavami
-    public static void convertUI(boolean que, int y, int u)		// gue: true-od zaciatku,false-predosli prevod y,u= predosli prevod
+    public static void convertUI()		// gue: true-od zaciatku,false-predosli prevod y,u= predosli prevod
     {
+        boolean que = true;
+        int y = 0;
+        int u = 0;
         while(true)
         {
             Scanner kb2 = new Scanner(System.in);
             if (que)
             {
+                que = true;
+
                 System.out.println("Z ktorej sústavy chceš prevádzať:");
                 System.out.println("    1 Binarna");
                 System.out.println("    2 Decimálna");
@@ -113,8 +117,9 @@ public class Main
                     break;
                 default:
                     System.out.println("Zlý vstup");
-                    convertUI(true, 0, 0);
+                    continue;
             }
+            kb2.nextLine();
             kb2.nextLine();
 
             System.out.println();
@@ -122,11 +127,16 @@ public class Main
 
             System.out.println("Čo chceš robiť? Pokračovať s nastaveným prevodom = Enter  Nový prevod = 0  Menu = 1");
             String back = kb2.nextLine();
+
+
+
             try {
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
-                   convertUI(true, 0, 0);		// metoda sa zacne vykonavat od zaciatku
+                    y = 0;
+                    u = 0;
+                    continue;		// metoda sa zacne vykonavat od zaciatku
                 }
                 if (in == 1)
                 {
@@ -135,20 +145,26 @@ public class Main
             }
             catch (Exception e)
             {
-                convertUI(false,y,u);			// predosli prevod
+                que = false;
+                continue;			// predosli prevod
             }
             System.out.println();
             System.out.println();
         }
     }
     // metoda ktora roby 2.maska/prefix
-    public static void prefixUI(boolean que, int y, int u)	// gue: true-od zaciatku,false-predosli prevod y,u= predosli prevod  
+    public static void prefixUI()	// gue: true-od zaciatku,false-predosli prevod y,u= predosli prevod
     {
+        boolean que = true;
+        int y = 0;
+        int u = 0;
         while(true)
         {
             Scanner kb2 = new Scanner(System.in);
             if (que)
             {
+                que = true;
+
                 System.out.println("Konvertovať z:");
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Maska");
@@ -282,8 +298,9 @@ public class Main
                     break;
                 default:
                     System.out.println("Zlý vstup");
-                    convertUI(true, 0, 0);
+                    continue;
             }
+            kb2.nextLine();
             kb2.nextLine();
 
             System.out.println();
@@ -291,11 +308,14 @@ public class Main
 
             System.out.println("Čo chceš robiť? Pokračovať s nastaveným prevodom = Enter  Nový prevod = 0  Menu = 1");
             String back = kb2.nextLine();
-            try {
+            try
+            {
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
-                    prefixUI(true, 0, 0);
+                    y = 0;
+                    u = 0;
+                    continue;
                 }
                 if (in == 1)
                 {
@@ -304,7 +324,8 @@ public class Main
             }
             catch (Exception e)
             {
-                prefixUI(false,y,u);
+                que = false;
+                continue;
             }
             System.out.println();
             System.out.println();
@@ -351,24 +372,28 @@ public class Main
     {
 		@SuppressWarnings("resource")
 		Scanner kb = new Scanner(System.in);
-        String [] inout = kb.nextLine().split("\\.");
-        try {
-            int[] address = stringArrayToIntArray(inout);
-            if(address.length == 4)
-            {
-                return address;
-            }
-            else
-            {
-            	System.out.println("Zadaj adresu so �tyrmi oktetmi");
-            	return getAddress();
-            }
-        }
-        catch (Exception e)
+        while (true)
         {
-            System.out.println("Zadaj iba ��sla");
-            return getAddress();
+            String [] inout = kb.nextLine().split("\\.");
+            try {
+                int[] address = stringArrayToIntArray(inout);
+                if(address.length == 4)
+                {
+                    return address;
+                }
+                else
+                {
+                    System.out.println("Zadaj adresu so štyrmi oktetmi");
+                    continue;
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println("Zlý vstup");
+                continue;
+            }
         }
+
     }
     public static void writeAddress(int[] address)
     {
