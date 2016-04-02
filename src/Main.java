@@ -17,7 +17,7 @@ public class Main
         menu();
 
     }
-    // hlavne menu aplikacie
+    // Applications menu
     public static void menu()
     {
         while (true)
@@ -31,7 +31,7 @@ public class Main
             System.out.print("Vyberte funkciu: ");
             int y;
             try {
-                y = kb.nextInt();    // vyber funkcii
+                y = kb.nextInt();    // select an option
             }
             catch (Exception e)
             {
@@ -58,35 +58,33 @@ public class Main
             }
         }
     }
-    // metoda ktorá roby 1.prevod medzy sústavami
-    public static void convertUI()		// gue: true-od zaciatku,false-predosli prevod y,u= predosli prevod
+    // method which do 1.prevod medzy sústavami
+    public static void convertUI()		
     {
-        boolean que = true;
-        int y = 0;
-        int u = 0;
+        boolean que = true;		// true-from beginning,false-Previous transfer
+        int y = 0;				// preset option
+        int u = 0;				// preset option
         while(true)
         {
             Scanner kb2 = new Scanner(System.in);
             if (que)
             {
-                que = true;
-
                 System.out.println("Z ktorej sústavy chceš prevádzať:");
                 System.out.println("    1 Binarna");
                 System.out.println("    2 Decimálna");
-                y = kb2.nextInt();                    // vyber moznosti
-                System.out.println("Do ktorej sústavy chceš prevádzať:");	// zobrazovat sa bude ponuka bez moznosti ktora bola uz vybrana
+                y = kb2.nextInt();					// select an option
+                System.out.println("Do ktorej sústavy chceš prevádzať:");	// display will offer no possibility that was already selected
                 u = 0;
                 if(y == 2)	
                 {
                     System.out.println("    1 Binarna");
-                    u = kb2.nextInt();				// vyber moznosti
+                    u = kb2.nextInt();				// select an option
                     u = 1;
                 }
                 if(y == 1)
                 {
                     System.out.println("    1 Decimálna");
-                    u = kb2.nextInt();				// vyber moznosti
+                    u = kb2.nextInt();				// select an option
                     u = 2;
                 }
                 System.out.println();
@@ -134,43 +132,42 @@ public class Main
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
+                	que = true;
                     y = 0;
                     u = 0;
-                    continue;		// metoda sa zacne vykonavat od zaciatku
+                    continue;		// method are initiated from the beginning
                 }
                 if (in == 1)
                 {
-                    break;						// metoda konci
+                    break;						// end method/transfer, and the program returns to the menu
                 }
             }
             catch (Exception e)
             {
                 que = false;
-                continue;			// predosli prevod
+                continue;			// Previous transfer
             }
             System.out.println();
             System.out.println();
         }
     }
-    // metoda ktora roby 2.maska/prefix
-    public static void prefixUI()	// gue: true-od zaciatku,false-predosli prevod y,u= predosli prevod
+    // method which do 2.maska/prefix
+    public static void prefixUI()	 
     {
-        boolean que = true;
-        int y = 0;
-        int u = 0;
+        boolean que = true;		// true-from the beginning,false-Previous transfer
+        int y = 0;				// preset option
+        int u = 0;				// preset option
         while(true)
         {
             Scanner kb2 = new Scanner(System.in);
             if (que)
             {
-                que = true;
-
                 System.out.println("Konvertovať z:");
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Maska");
                 System.out.println("    3 Wildcard");
-                y = kb2.nextInt();                      // vyber z moznosti
-                System.out.println("Konvertovať do:");  // zobrazovat sa bude ponuka bez moznosti ktora bola uz vybrana
+                y = kb2.nextInt();                      // select an option
+                System.out.println("Konvertovať do:");  // display will offer no possibility that was already selected
                 u = 0;
                 if(y == 1)
                 {
@@ -313,13 +310,14 @@ public class Main
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
+                	que = true;
                     y = 0;
                     u = 0;
-                    continue;
+                    continue;							// method are initiated from the beginning
                 }
                 if (in == 1)
                 {
-                    break;
+                    break;								// end method/transfer, and the program returns to the menu
                 }
             }
             catch (Exception e)
@@ -331,36 +329,37 @@ public class Main
             System.out.println();
         }
     }
+    // method which do 3.IP Review
     public static void ipReviewUI()
     {
         Scanner kb7 = new Scanner(System.in);
         System.out.print("Zadaj IPv4 adresu: ");
-        int[] address = getAddress();
-        System.out.print("Zadaj prefix: ");
+        int[] address = getAddress();					// address
+        System.out.print("Zadaj prefix: ");				// prefix network
         int prefix = kb7.nextInt();
         System.out.println();
 
         System.out.print("Maska je: ");
-        writeAddress(fromPrefixToMask(prefix));
+        writeAddress(fromPrefixToMask(prefix));			// subnet mask
         System.out.println();
 
-        System.out.print("Network adress: ");
-        writeAddress(getNetOrBroAddress(address,prefix,true));
+        System.out.print("Network adress: ");			
+        writeAddress(getNetOrBroAddress(address,prefix,true));		// network address
         System.out.println();
 
-        System.out.print("Broadcast adress: ");
+        System.out.print("Broadcast adress: ");						// Broadcast adress
         writeAddress(getNetOrBroAddress(address,prefix,false));
         System.out.println();
 
-        System.out.println("Number of address: " + getSpaceAddress(prefix));
+        System.out.println("Number of address: " + getSpaceAddress(prefix));	// Number of address
 
-        System.out.println("Number of address for devices: " + (getSpaceAddress(prefix) - 2));
+        System.out.println("Number of address for devices: " + (getSpaceAddress(prefix) - 2));	// Number of address for devices:
 
-        System.out.print("The first usable adress: ");
+        System.out.print("The first usable adress: ");				// The first usable adress
         writeAddress(getFirstOrLastAddress(address,prefix,true));
         System.out.println();
 
-        System.out.print("The last usable adress: ");
+        System.out.print("The last usable adress: ");				// The last usable adress
         writeAddress(getFirstOrLastAddress(address,prefix,false));
         System.out.println();
 
@@ -395,6 +394,7 @@ public class Main
         }
 
     }
+	// method which write address with four octet
     public static void writeAddress(int[] address)
     {
         for (int i = 0; i < 4; i++)
@@ -580,7 +580,7 @@ public class Main
     	return spaceAddress;	
     }
     // metoda na zistenie prvej a poslednej pou�ite�nej adresy
-    public static int[] getFirstOrLastAddress(int[] address,int prefix,boolean or)
+    public static int[] getFirstOrLastAddress(int[] address,int prefix,boolean or)	//if or==true->getFirst if or==false->getLast
     {
     	int[] net = getNetOrBroAddress(address,prefix,true);     	// v tomto poli je ulozena sietova adresa	
     	int[] bro = getNetOrBroAddress(address,prefix,false);		// v tomto poli je ulozena broadcastova adresa
