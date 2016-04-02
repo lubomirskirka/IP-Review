@@ -15,14 +15,9 @@ public class Main
     {
         System.out.println("Vitajte v aplikácii ");
         menu();
-<<<<<<< HEAD
-        System.out.println("ij");
-    	
-=======
-        
-    	System.out.println("najlepsi program");
->>>>>>> origin/Develop
+
     }
+    // hlavne menu aplikacie
     public static void menu()
     {
         while (true)
@@ -34,7 +29,7 @@ public class Main
             System.out.println("    2 Maska/Prefix");
             System.out.println("    3 IP Review");
             System.out.print("Vyberte funkciu: ");
-            int y = kb.nextInt();
+            int y = kb.nextInt();            // vyber funkcii
             System.out.println();
             switch (y)
             {
@@ -54,7 +49,8 @@ public class Main
             }
         }
     }
-    public static void convertUI(boolean que, int y, int u)
+    // metoda ktorá roby 1.prevod medzy sústavami
+    public static void convertUI(boolean que, int y, int u)		// gue: true-od zaciatku,false-predosli prevod y,u= predosli prevod
     {
         while(true)
         {
@@ -64,19 +60,19 @@ public class Main
                 System.out.println("Z ktorej sústavy chceš prevádzať:");
                 System.out.println("    1 Binarna");
                 System.out.println("    2 Decimálna");
-                y = kb2.nextInt();
-                System.out.println("Do ktorej sústavy chceš prevádzať:");
+                y = kb2.nextInt();                    // vyber moznosti
+                System.out.println("Do ktorej sústavy chceš prevádzať:");	// zobrazovat sa bude ponuka bez moznosti ktora bola uz vybrana
                 u = 0;
-                if(y == 2)
+                if(y == 2)	
                 {
                     System.out.println("    1 Binarna");
-                    u = kb2.nextInt();
+                    u = kb2.nextInt();				// vyber moznosti
                     u = 1;
                 }
                 if(y == 1)
                 {
                     System.out.println("    1 Decimálna");
-                    u = kb2.nextInt();
+                    u = kb2.nextInt();				// vyber moznosti
                     u = 2;
                 }
                 System.out.println();
@@ -120,22 +116,23 @@ public class Main
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
-                   convertUI(true, 0, 0);
+                   convertUI(true, 0, 0);		// metoda sa zacne vykonavat od zaciatku
                 }
                 if (in == 1)
                 {
-                    break;
+                    break;						// metoda konci
                 }
             }
             catch (Exception e)
             {
-                convertUI(false,y,u);
+                convertUI(false,y,u);			// predosli prevod
             }
             System.out.println();
             System.out.println();
         }
     }
-    public static void prefixUI(boolean que, int y, int u)
+    // metoda ktora roby 2.maska/prefix
+    public static void prefixUI(boolean que, int y, int u)	// gue: true-od zaciatku,false-predosli prevod y,u= predosli prevod  
     {
         while(true)
         {
@@ -145,21 +142,21 @@ public class Main
                 System.out.println("Konvertovať z:");
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Maska");
-                y = kb2.nextInt();
-                System.out.println("Konvertovať do:");
+                y = kb2.nextInt();								// vyber z moznosti
+                System.out.println("Konvertovať do:");			// zobrazovat sa bude ponuka bez moznosti ktora bola uz vybrana
                 u = 0;
                 if(y == 1)
                 {
                     System.out.println("    1 Maska");
                     System.out.println("    2 Wildcard");
-                    u = kb2.nextInt();
+                    u = kb2.nextInt();							// vyber z moznosti
 
                 }
                 if(y == 2)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Wildcard");
-                    u = kb2.nextInt();
+                    u = kb2.nextInt();							// vzber z moynosti
                     if (u == 1)
                         u = 3;
                 }
@@ -175,7 +172,7 @@ public class Main
                         {
                             System.out.print("Zadaj prefix: ");
                             int in = kb2.nextInt();
-                            if (in >= 0 && in <= 32)
+                            if (in >= 0 && in <= 32)					// prefix musi bit od 0 do 32
                             {
                                 System.out.print("Maska je: ");
                                 int[] mask = fromPrefixToMask(in);
@@ -199,7 +196,7 @@ public class Main
                         {
                             System.out.print("Zadaj Prefix: ");
                             int in = kb2.nextInt();
-                            if (in >= 0 && in <= 32)
+                            if (in >= 0 && in <= 32)					// prefix musi byt od 0 do 32
                             {
                                 System.out.print("Wildcard je: ");
                                 int[] wildcard = fromPrefixToVildcard(in);
@@ -235,16 +232,16 @@ public class Main
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
-                    prefixUI(true, 0, 0);
+                    prefixUI(true, 0, 0);		// od zaciatku
                 }
                 if (in == 1)
                 {
-                    break;
+                    break;						// metoda skonci
                 }
             }
             catch (Exception e)
             {
-                prefixUI(false,y,u);
+                prefixUI(false,y,u);			// predosli prevod
             }
             System.out.println();
             System.out.println();
@@ -293,7 +290,7 @@ public class Main
         int[] bin = new int[bits];  // pole ktoreho prvky maju ulozene binarne cislo rovnajuce sa dec
         int prvok = bits - 1;
         int ex = dec;
-        for(;prvok >= 0;prvok--)
+        for(;prvok >= 0;prvok--)	// cyklus ktory meni deli dec cislo dvoma 
         {
             bin[prvok] = ex %2;
             ex = ex / 2;
@@ -317,7 +314,7 @@ public class Main
     public static int fromBinToDec(int[] bin)
     {
         int dec = 0;                                // Vysledne cislo v desiatkovej sustave
-        int index = 0;
+        int index = 0;								// prvok pola bin
         for(int i = bin.length - 1; i >= 0; i--)
         {
             if(bin[i] == 1)
@@ -363,7 +360,7 @@ public class Main
             {
                 if(pole[a] == 1)
                     prefix++;
-                else
+                else							// ak sa dany prvok bude rovnat nule program vrati prefix
                     return prefix;
             }
         }
@@ -379,8 +376,8 @@ public class Main
     // metoda ktora z masky uroby vildcard
     public static int[] fromMaskToVildcard(int[] maska)
     {
-        int[] vildcard = new int[4];      // pole v ktorom je ulozeny vildcard
-        int prvok = 0;
+        int[] vildcard = new int[4];      	// pole v ktorom je ulozeny vildcard
+        int prvok = 0;						//prvok pola wildcard
         for(int a : maska)
         {
             vildcard[prvok] = 255 - a;
@@ -407,9 +404,9 @@ public class Main
     	return prefix;
     }
     // metoda na ziskanie sietovej alebo broadcastovej adresy
-    public static int[] getNetOrBroAddress(int[] address,int prefix,boolean net)
+    public static int[] getNetOrBroAddress(int[] address,int prefix,boolean net)	// ak net==true->getNet  ak net==false->getBro
     {
-    	if(prefix == 32)
+    	if(prefix == 32)											// ak prefix = 32 vrati celu adresu lebo nic sa nemeni
     		return address;
     	int[] octet1 = fromDecToBin8(address[0]);
     	int[] octet2 = fromDecToBin8(address[1]);
@@ -418,27 +415,27 @@ public class Main
     	int fromThisPrefix = (prefix == 32) ? 4 : prefix / 8 + 1; 	// vypocita v ktorom oktete sa za�inaju meni� 0/1 
     	int border = prefix - (prefix / 8)*8;						// hranica zmeny 0/1 v prvom upravujucom sa oktete
     	
-    	changeOctet(octet1, fromThisPrefix, 1, border, net);
-    	changeOctet(octet2, fromThisPrefix, 2, border, net);
-    	changeOctet(octet3, fromThisPrefix, 3, border, net);
-    	changeOctet(octet4, fromThisPrefix, 4, border, net);
+    	changeOctet(octet1, fromThisPrefix, 1, border, net);		// meni sa octet1
+    	changeOctet(octet2, fromThisPrefix, 2, border, net);		// meni sa octet2
+    	changeOctet(octet3, fromThisPrefix, 3, border, net);		// meni sa octet3
+    	changeOctet(octet4, fromThisPrefix, 4, border, net);		// meni sa octet4
     	
-    	int[] outAddress = new int[4];
-    	outAddress[0] = fromBinToDec(octet1);
+    	int[] outAddress = new int[4];								// pole do ktoreho sa uklada vysledna adresa
+    	outAddress[0] = fromBinToDec(octet1);						
     	outAddress[1] = fromBinToDec(octet2);
     	outAddress[2] = fromBinToDec(octet3);
     	outAddress[3] = fromBinToDec(octet4);
     	return outAddress;
     }
     // metoda na opravu octetu pre getNetOrBroAddress
-    public static void changeOctet(int[] octet,int fromThisPrefix,int numOctet,int border,boolean net)
+    public static void changeOctet(int[] octet,int fromThisPrefix,int numOctet,int border,boolean net)	//oktet,fromThisPrefix,cislo oktetu,border,net
     {
     	if(fromThisPrefix <= numOctet)			// numOctet - cislo prave upravujuceho sa oktetu
     	{
     		border = (fromThisPrefix == numOctet) ? border : 0;
     		for(int i = border;i < 8;i++)
     		{
-    			octet[i] = (net) ? 0 : 1;		// menia sa 1/0
+    			octet[i] = (net) ? 0 : 1;		// menia sa 1/0    - ak true cisla sa menia na 0  ak false na 1
     		}
     	}
     }
@@ -452,15 +449,15 @@ public class Main
     // metoda na zistenie prvej a poslednej pou�ite�nej adresy
     public static int[] getFirstOrLastAddress(int[] address,int prefix,boolean or)
     {
-    	int[] net = getNetOrBroAddress(address,prefix,true);     // v tomto poli je ulozena
-    	int[] bro = getNetOrBroAddress(address,prefix,false);
+    	int[] net = getNetOrBroAddress(address,prefix,true);     	// v tomto poli je ulozena sietova adresa	
+    	int[] bro = getNetOrBroAddress(address,prefix,false);		// v tomto poli je ulozena broadcastova adresa
     	
     	net[3]++;
     	bro[3]--;
     	
-    	return (or) ? net : bro;
+    	return (or) ? net : bro;	
     }
-    // mocnin�tor
+    // mocninátor
     public static int mocnenie(int zaklad,int index)
     {
         int out = 0;
@@ -476,7 +473,7 @@ public class Main
     // metoda ktor� zis�uje kolko bytov ma jedno �islo
     public static int bits(int dec)
     {
-        if (dec == 0)
+        if (dec == 0)		// ak decimalne cislo sa rovna 0 binarne ma potom 1 cislo a to je 0 
             return 1;
         for(int index = 0;;index++)
         {
