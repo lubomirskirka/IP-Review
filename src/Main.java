@@ -29,10 +29,9 @@ public class Main
             System.out.println("    2 Maska/Prefix");
             System.out.println("    3 IP Review");
             System.out.print("Vyberte funkciu: ");
-<<<<<<< HEAD
             int y;
             try {
-                y = kb.nextInt();
+                y = kb.nextInt();    // vyber funkcii
             }
             catch (Exception e)
             {
@@ -41,9 +40,6 @@ public class Main
                 System.out.println();
                 continue;
             }
-=======
-            int y = kb.nextInt();            // vyber funkcii
->>>>>>> Develop
             System.out.println();
             switch (y)
             {
