@@ -15,8 +15,13 @@ public class Main
     {
         System.out.println("Vitajte v aplikácii ");
         menu();
+<<<<<<< HEAD
         System.out.println("ij");
     	
+=======
+        
+    	System.out.println("najlepsi program");
+>>>>>>> origin/Develop
     }
     public static void menu()
     {
