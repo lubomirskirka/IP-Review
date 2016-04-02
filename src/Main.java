@@ -50,7 +50,7 @@ public class Main
                     prefixUI(true, 0, 0);
                     break;
                 case 3:
-                    System.out.println("    3 IP Review");
+                    ipReviewUI();
                     break;
                 default:
                     System.out.println("Zadaj číslo fukcie");
@@ -310,7 +310,42 @@ public class Main
             System.out.println();
         }
     }
+    public static void ipReviewUI()
+    {
+        Scanner kb7 = new Scanner(System.in);
+        System.out.print("Zadaj IPv4 adresu: ");
+        int[] address = getAddress();
+        System.out.print("Zadaj prefix: ");
+        int prefix = kb7.nextInt();
+        System.out.println();
 
+        System.out.print("Maska je: ");
+        writeAddress(fromPrefixToMask(prefix));
+        System.out.println();
+
+        System.out.print("Network adress: ");
+        writeAddress(getNetOrBroAddress(address,prefix,true));
+        System.out.println();
+
+        System.out.print("Broadcast adress: ");
+        writeAddress(getNetOrBroAddress(address,prefix,false));
+        System.out.println();
+
+        System.out.println("Number of address: " + getSpaceAddress(prefix));
+
+        System.out.println("Number of address for devices: " + (getSpaceAddress(prefix) - 2));
+
+        System.out.print("The first usable adress: ");
+        writeAddress(getFirstOrLastAddress(address,prefix,true));
+        System.out.println();
+
+        System.out.print("The last usable adress: ");
+        writeAddress(getFirstOrLastAddress(address,prefix,false));
+        System.out.println();
+
+        kb7.nextLine();
+        kb7.nextLine();
+    }
     //metod for get IPv4 address from user in console
 	public static int[] getAddress()
     {
