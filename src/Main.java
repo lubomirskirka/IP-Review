@@ -307,6 +307,7 @@ public class Main
             System.out.println();
         }
     }
+
     //metod for get IPv4 address from user in console
 	public static int[] getAddress()
     {
