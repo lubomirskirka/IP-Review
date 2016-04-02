@@ -29,7 +29,21 @@ public class Main
             System.out.println("    2 Maska/Prefix");
             System.out.println("    3 IP Review");
             System.out.print("Vyberte funkciu: ");
+<<<<<<< HEAD
+            int y;
+            try {
+                y = kb.nextInt();
+            }
+            catch (Exception e)
+            {
+                System.out.println("Zlý vstup.");
+                System.out.println();
+                System.out.println();
+                continue;
+            }
+=======
             int y = kb.nextInt();            // vyber funkcii
+>>>>>>> Develop
             System.out.println();
             switch (y)
             {
@@ -142,23 +156,72 @@ public class Main
                 System.out.println("Konvertovať z:");
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Maska");
+<<<<<<< HEAD
+                System.out.println("    3 Wildcard");
+                y = kb2.nextInt();
+                System.out.println("Konvertovať do:");
+=======
                 y = kb2.nextInt();								// vyber z moznosti
                 System.out.println("Konvertovať do:");			// zobrazovat sa bude ponuka bez moznosti ktora bola uz vybrana
+>>>>>>> Develop
                 u = 0;
                 if(y == 1)
                 {
                     System.out.println("    1 Maska");
                     System.out.println("    2 Wildcard");
+<<<<<<< HEAD
+                    u = kb2.nextInt();
+                    if (u < 0 && u > 3)
+                    {
+                        System.out.println("Zlý vstup");
+                        continue;
+                    }
+=======
                     u = kb2.nextInt();							// vyber z moznosti
 
+>>>>>>> Develop
                 }
                 if(y == 2)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Wildcard");
+<<<<<<< HEAD
+                    u = kb2.nextInt();
+                    switch(u)
+                    {
+                        case 1:
+                            u = 3;
+                            break;
+                        case 2:
+                            u = 4;
+                            break;
+                        default:
+                            System.out.println("Zlý vstup");
+                            continue;
+                    }
+                }
+                if(y == 3)
+                {
+                    System.out.println("    1 Prefix");
+                    System.out.println("    2 Maska");
+                    u = kb2.nextInt();
+                    switch(u)
+                    {
+                        case 1:
+                            u = 5;
+                            break;
+                        case 2:
+                            u = 6;
+                            break;
+                        default:
+                            System.out.println("Zlý vstup");
+                            continue;
+                    }
+=======
                     u = kb2.nextInt();							// vzber z moynosti
                     if (u == 1)
                         u = 3;
+>>>>>>> Develop
                 }
                 System.out.println();
             }
@@ -176,12 +239,7 @@ public class Main
                             {
                                 System.out.print("Maska je: ");
                                 int[] mask = fromPrefixToMask(in);
-                                for (int i = 0; i < 4; i++)
-                                {
-                                    System.out.print(mask[i]);
-                                    if (i != 3)
-                                        System.out.print(".");
-                                }
+                                writeAddress(mask);
                                 break;
                             }
                             else
@@ -200,12 +258,7 @@ public class Main
                             {
                                 System.out.print("Wildcard je: ");
                                 int[] wildcard = fromPrefixToVildcard(in);
-                                for (int i = 0; i < 4; i++)
-                                {
-                                    System.out.print(wildcard[i]);
-                                    if (i != 3)
-                                        System.out.print(".");
-                                }
+                                writeAddress(wildcard);
                                 break;
                             }
                             else
@@ -216,6 +269,36 @@ public class Main
                     }
                     break;
                 case 2:
+                    if(u == 3)
+                    {
+                            System.out.print("Zadaj masku: ");
+                            int[] in = getAddress();
+                            System.out.println("Prefix je " + fromMaskToPrefix(in));
+                    }
+                    if(u == 4)
+                    {
+                        System.out.print("Zadaj masku: ");
+                        int[] in = getAddress();
+                        int[] out = fromMaskToVildcard(in);
+                        System.out.print("Wildcard je ");
+                        writeAddress(out);
+                    }
+                    break;
+                case 3:
+                    if(u == 5)
+                    {
+                        System.out.print("Zadaj wildcard: ");
+                        int[] in = getAddress();
+                        System.out.println("Prefix je " + fromWildcardToPrefix(in));
+                    }
+                    if(u == 6)
+                    {
+                        System.out.print("Zadaj wildcard: ");
+                        int[] in = getAddress();
+                        int[] out = fromWildcardToMask(in);
+                        System.out.print("Maska je ");
+                        writeAddress(out);
+                    }
                     break;
                 default:
                     System.out.println("Zlý vstup");
@@ -247,6 +330,7 @@ public class Main
             System.out.println();
         }
     }
+
     //metod for get IPv4 address from user in console
 	public static int[] getAddress()
     {
@@ -269,6 +353,15 @@ public class Main
         {
             System.out.println("Zadaj iba ��sla");
             return getAddress();
+        }
+    }
+    public static void writeAddress(int[] address)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            System.out.print(address[i]);
+            if (i != 3)
+                System.out.print(".");
         }
     }
     public static int[] getBinNum()
