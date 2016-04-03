@@ -323,7 +323,7 @@ public class Main
             catch (Exception e)
             {
                 request = false;
-                continue;
+                continue;                               // Previous transfer
             }
             System.out.println();
             System.out.println();
@@ -353,7 +353,7 @@ public class Main
 
         System.out.println("Number of address: " + getSpaceAddress(prefix));	// Number of address
 
-        System.out.println("Number of address for devices: " + (getSpaceAddress(prefix) - 2));	// Number of address for devices:
+        System.out.println("Number of address for devices: " + (getSpaceAddress(prefix) - 2));	// Number of address for devices
 
         System.out.print("The first usable adress: ");				// The first usable adress
         writeAddress(getFirstOrLastAddress(address,prefix,true));
@@ -422,20 +422,23 @@ public class Main
         }
         return stringArrayToIntArray(inout);
     }
-    // metoda na pocitanie z desiatkovej do binarnej s�stavy
+    // method for calculating from decimal to binary
     public static int[] fromDecToBin(int dec)
     {
-        int bits = bits(dec);       // premena v ktorej je ulozeny pocet bitov daneho dec cisla
-        int[] bin = new int[bits];  // pole ktoreho prvky maju ulozene binarne cislo rovnajuce sa dec
+        int bits = bits(dec);       // variable which is stored the number of bits of the decimal number
+        int[] bin = new int[bits];  // field to which will store a binary number
         int rest = dec;
-        for(int index = bits - 1;index >= 0;index--)	// cyklus ktory meni deli dec cislo dvoma
+        for(int index = bits - 1;index >= 0;index--)	// dividing the decimal number 2
         {
             bin[index] = rest %2;
             rest = rest / 2;
         }
         return bin;
     }
-    // specialna metoda na pocitanie z desiatkovej do binarnej (8 bitov) s�stavy
+    /*
+     *  special method for calculating from decimal to binary (8 bits)
+     * 	method returns an eight bit binary number
+     */
     public static int[] fromDecToBin8(int dec)
     {
     	int[] bin = fromDecToBin(dec);
@@ -548,8 +551,7 @@ public class Main
     	int[] octet2 = fromDecToBin8(address[1]);
     	int[] octet3 = fromDecToBin8(address[2]);
     	int[] octet4 = fromDecToBin8(address[3]);
-        
-    	int fromThisPrefix = (prefix == 32) ? 4 : prefix / 8 + 1; 	// vypocita v ktorom oktete sa za�inaju meni� 0/1 
+    	int fromThisPrefix = prefix / 8 + 1; 	// vypocita v ktorom oktete sa za�inaju meni� 0/1
     	int border = prefix - (prefix / 8)*8;						// hranica zmeny 0/1 v prvom upravujucom sa oktete
     	
     	changeOctet(octet1, fromThisPrefix, 1, border, net);		// meni sa octet1
