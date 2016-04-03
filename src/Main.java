@@ -61,39 +61,39 @@ public class Main
     // method which do 1.prevod medzy sústavami
     public static void convertUI()		
     {
-        boolean que = true;		// true-from beginning,false-Previous transfer
-        int y = 0;				// preset option
-        int u = 0;				// preset option
+        boolean request = true;		// true-from beginning,false-Previous transfer
+        int option1 = 0;				// preset option
+        int option2 = 0;				// preset option
         while(true)
         {
             Scanner kb2 = new Scanner(System.in);
-            if (que)
+            if (request)
             {
                 System.out.println("Z ktorej sústavy chceš prevádzať:");
                 System.out.println("    1 Binarna");
                 System.out.println("    2 Decimálna");
-                y = kb2.nextInt();					// select an option
+                option1 = kb2.nextInt();					// select an option
                 System.out.println("Do ktorej sústavy chceš prevádzať:");	// display will offer no possibility that was already selected
-                u = 0;
-                if(y == 2)	
+                option2 = 0;
+                if(option1 == 2)
                 {
                     System.out.println("    1 Binarna");
-                    u = kb2.nextInt();				// select an option
-                    u = 1;
+                    option2 = kb2.nextInt();				// select an option
+                    option2 = 1;
                 }
-                if(y == 1)
+                if(option1 == 1)
                 {
                     System.out.println("    1 Decimálna");
-                    u = kb2.nextInt();				// select an option
-                    u = 2;
+                    option2 = kb2.nextInt();				// select an option
+                    option2 = 2;
                 }
                 System.out.println();
             }
 
-            switch (y)
+            switch (option1)
             {
                 case 1:
-                    if(u == 2)
+                    if(option2 == 2)
                     {
                         System.out.print("Zadaj binarne číslo: ");
                         int[] in = getBinNum();
@@ -101,7 +101,7 @@ public class Main
                     }
                     break;
                 case 2:
-                    if(u == 1)
+                    if(option2 == 1)
                     {
                         System.out.print("Zadaj decimalne číslo: ");
                         int in = kb2.nextInt();
@@ -132,9 +132,9 @@ public class Main
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
-                	que = true;
-                    y = 0;
-                    u = 0;
+                	request = true;
+                    option1 = 0;
+                    option2 = 0;
                     continue;		// method are initiated from the beginning
                 }
                 if (in == 1)
@@ -144,7 +144,7 @@ public class Main
             }
             catch (Exception e)
             {
-                que = false;
+                request = false;
                 continue;			// Previous transfer
             }
             System.out.println();
