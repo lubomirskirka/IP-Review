@@ -13,7 +13,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("Vitajte v aplikácii ");
+        System.out.println("Pocty v0.5");
         menu();
 
     }
@@ -24,23 +24,22 @@ public class Main
         {
             Scanner kb = new Scanner(System.in);
 
-            System.out.println("Funkcie:");
-            System.out.println("    1 Prevod medzi sústavami");
-            System.out.println("    2 Maska/Prefix");
+            System.out.println("Functions:");
+            System.out.println("    1 Convert between numeral system");
+            System.out.println("    2 Mask/Prefix");
             System.out.println("    3 IP Review");
-            System.out.print("Vyberte funkciu: ");
+            System.out.print("Choose function: ");
             int y;
             try {
                 y = kb.nextInt();    // select an option
             }
             catch (Exception e)
             {
-                System.out.println("Zlý vstup.");
-                System.out.println();
-                System.out.println();
+                System.out.println("Wrong input");
+                blank(2);
                 continue;
             }
-            System.out.println();
+            blank(1);
             switch (y)
             {
                 case 1:
@@ -53,7 +52,8 @@ public class Main
                     ipReviewUI();
                     break;
                 default:
-                    System.out.println("Zadaj číslo fukcie");
+                    System.out.println("Wrong function");
+                    blank(2);
                     continue;
             }
         }
@@ -154,62 +154,62 @@ public class Main
     // method which do 2.maska/prefix
     public static void prefixUI()	 
     {
-        boolean que = true;		// true-from the beginning,false-Previous transfer
-        int y = 0;				// preset option
-        int u = 0;				// preset option
+        boolean request = true;		// true-from the beginning,false-Previous transfer
+        int option1 = 0;				// preset option
+        int option2 = 0;				// preset option
         while(true)
         {
             Scanner kb2 = new Scanner(System.in);
-            if (que)
+            if (request)
             {
                 System.out.println("Konvertovať z:");
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Maska");
                 System.out.println("    3 Wildcard");
-                y = kb2.nextInt();                      // select an option
+                option1 = kb2.nextInt();                      // select an option
                 System.out.println("Konvertovať do:");  // display will offer no possibility that was already selected
-                u = 0;
-                if(y == 1)
+                option2 = 0;
+                if(option1 == 1)
                 {
                     System.out.println("    1 Maska");
                     System.out.println("    2 Wildcard");
-                    u = kb2.nextInt();
-                    if (u < 0 && u > 3)
+                    option2 = kb2.nextInt();
+                    if (option2 < 0 && option2 > 3)
                     {
                         System.out.println("Zlý vstup");
                         continue;
                     }
                 }
-                if(y == 2)
+                if(option1 == 2)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Wildcard");
-                    u = kb2.nextInt();
-                    switch(u)
+                    option2 = kb2.nextInt();
+                    switch(option2)
                     {
                         case 1:
-                            u = 3;
+                            option2 = 3;
                             break;
                         case 2:
-                            u = 4;
+                            option2 = 4;
                             break;
                         default:
                             System.out.println("Zlý vstup");
                             continue;
                     }
                 }
-                if(y == 3)
+                if(option1 == 3)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Maska");
-                    u = kb2.nextInt();
-                    switch(u)
+                    option2 = kb2.nextInt();
+                    switch(option2)
                     {
                         case 1:
-                            u = 5;
+                            option2 = 5;
                             break;
                         case 2:
-                            u = 6;
+                            option2 = 6;
                             break;
                         default:
                             System.out.println("Zlý vstup");
@@ -219,10 +219,10 @@ public class Main
                 System.out.println();
             }
 
-            switch (y)
+            switch (option1)
             {
                 case 1:
-                    if(u == 1)
+                    if(option2 == 1)
                     {
                         while (true)
                         {
@@ -241,7 +241,7 @@ public class Main
                             }
                         }
                     }
-                    if(u == 2)
+                    if(option2 == 2)
                     {
                         while (true)
                         {
@@ -250,7 +250,7 @@ public class Main
                             if (in >= 0 && in <= 32)
                             {
                                 System.out.print("Wildcard je: ");
-                                int[] wildcard = fromPrefixToVildcard(in);
+                                int[] wildcard = fromPrefixToWildcard(in);
                                 writeAddress(wildcard);
                                 break;
                             }
@@ -262,29 +262,29 @@ public class Main
                     }
                     break;
                 case 2:
-                    if(u == 3)
+                    if(option2 == 3)
                     {
                         System.out.print("Zadaj masku: ");
                         int[] in = getAddress();
                         System.out.println("Prefix je " + fromMaskToPrefix(in));
                     }
-                    if(u == 4)
+                    if(option2 == 4)
                     {
                         System.out.print("Zadaj masku: ");
                         int[] in = getAddress();
-                        int[] out = fromMaskToVildcard(in);
+                        int[] out = fromMaskToWildcard(in);
                         System.out.print("Wildcard je ");
                         writeAddress(out);
                     }
                     break;
                 case 3:
-                    if(u == 5)
+                    if(option2 == 5)
                     {
                         System.out.print("Zadaj wildcard: ");
                         int[] in = getAddress();
                         System.out.println("Prefix je " + fromWildcardToPrefix(in));
                     }
-                    if(u == 6)
+                    if(option2 == 6)
                     {
                         System.out.print("Zadaj wildcard: ");
                         int[] in = getAddress();
@@ -310,9 +310,9 @@ public class Main
                 int in = Integer.parseInt(back);
                 if(in == 0)
                 {
-                	que = true;
-                    y = 0;
-                    u = 0;
+                	request = true;
+                    option1 = 0;
+                    option2 = 0;
                     continue;							// method are initiated from the beginning
                 }
                 if (in == 1)
@@ -322,7 +322,7 @@ public class Main
             }
             catch (Exception e)
             {
-                que = false;
+                request = false;
                 continue;
             }
             System.out.println();
@@ -365,6 +365,12 @@ public class Main
 
         kb7.nextLine();
         kb7.nextLine();
+    }
+    //metod for blank lines in UI
+    public static void blank(int num)
+    {
+        for (int i = 0; i < num;i++)
+            System.out.println();
     }
     //metod for get IPv4 address from user in console
 	public static int[] getAddress()
@@ -421,12 +427,11 @@ public class Main
     {
         int bits = bits(dec);       // premena v ktorej je ulozeny pocet bitov daneho dec cisla
         int[] bin = new int[bits];  // pole ktoreho prvky maju ulozene binarne cislo rovnajuce sa dec
-        int prvok = bits - 1;
-        int ex = dec;
-        for(;prvok >= 0;prvok--)	// cyklus ktory meni deli dec cislo dvoma 
+        int rest = dec;
+        for(int index = bits - 1;index >= 0;index--)	// cyklus ktory meni deli dec cislo dvoma
         {
-            bin[prvok] = ex %2;
-            ex = ex / 2;
+            bin[index] = rest %2;
+            rest = rest / 2;
         }
         return bin;
     }
@@ -452,7 +457,7 @@ public class Main
         {
             if(bin[i] == 1)
             {
-                dec += mocnenie(2,index);
+                dec += exponentiation(2,index);
                 index++;
             }
             else
@@ -500,23 +505,21 @@ public class Main
         return prefix;
     }
     // metoda ktora z prefixu uroby vildcard
-    public static int[] fromPrefixToVildcard(int prefix)
+    public static int[] fromPrefixToWildcard(int prefix)
     {
-    	int[] maska = fromPrefixToMask(prefix);         // pole v ktorom je konvertovany prefix na masku
-		int[] vildcard = fromMaskToVildcard(maska);     // pole v ktorom je ulozeny vildcard
-		return vildcard;
+    	int[] mask = fromPrefixToMask(prefix);         // pole v ktorom je konvertovany prefix na masku
+		int[] Wildcard = fromMaskToWildcard(mask);     // pole v ktorom je ulozeny vildcard
+		return Wildcard;
     }
     // metoda ktora z masky uroby vildcard
-    public static int[] fromMaskToVildcard(int[] maska)
+    public static int[] fromMaskToWildcard(int[] mask)
     {
-        int[] vildcard = new int[4];      	// pole v ktorom je ulozeny vildcard
-        int prvok = 0;						//prvok pola wildcard
-        for(int a : maska)
+        int[] Wildcard = new int[4];      	// pole v ktorom je ulozeny vildcard
+        for(int index = 0; index < Wildcard.length;index++)
         {
-            vildcard[prvok] = 255 - a;
-            prvok++;
+            Wildcard[index] = 255 - mask[index];
         }
-        return vildcard;
+        return Wildcard;
     }
     // metoda ktora z wildcardu uroby masku
     public static int[] fromWildcardToMask(int[] wildcard)
@@ -532,8 +535,7 @@ public class Main
     // metoda ktora z wildcardu uroby prefix
     public static int fromWildcardToPrefix(int[] wildcard)
     {
-    	int prefix;
-    	prefix = fromMaskToPrefix(fromWildcardToMask(wildcard));
+    	int prefix = fromMaskToPrefix(fromWildcardToMask(wildcard));
     	return prefix;
     }
     // metoda na ziskanie sietovej alebo broadcastovej adresy
@@ -541,10 +543,12 @@ public class Main
     {
     	if(prefix == 32)											// ak prefix = 32 vrati celu adresu lebo nic sa nemeni
     		return address;
+        
     	int[] octet1 = fromDecToBin8(address[0]);
     	int[] octet2 = fromDecToBin8(address[1]);
     	int[] octet3 = fromDecToBin8(address[2]);
     	int[] octet4 = fromDecToBin8(address[3]);
+        
     	int fromThisPrefix = (prefix == 32) ? 4 : prefix / 8 + 1; 	// vypocita v ktorom oktete sa za�inaju meni� 0/1 
     	int border = prefix - (prefix / 8)*8;						// hranica zmeny 0/1 v prvom upravujucom sa oktete
     	
@@ -576,7 +580,7 @@ public class Main
     public static int getSpaceAddress(int prefix)
     {
     	int spaceAddress;
-    	spaceAddress = mocnenie(2,32 - prefix);
+    	spaceAddress = exponentiation(2,32 - prefix);
     	return spaceAddress;	
     }
     // metoda na zistenie prvej a poslednej pou�ite�nej adresy
@@ -591,15 +595,15 @@ public class Main
     	return (or) ? net : bro;	
     }
     // mocninátor
-    public static int mocnenie(int zaklad,int index)
+    public static int exponentiation(int base, int exponent)
     {
         int out = 0;
-        for(int i = 0; i <= index; i++)
+        for(int i = 0; i <= exponent; i++)
         {
             if( i == 0)
                 out = 1;
             else
-                out = out * zaklad;
+                out = out * base;
         }
         return out;
     }
@@ -610,7 +614,7 @@ public class Main
             return 1;
         for(int index = 0;;index++)
         {
-            int f = mocnenie(2,index);   // f = vysledok mocnenia cisla 2 indexom
+            int f = exponentiation(2,index);   // f = vysledok mocnenia cisla 2 indexom
             if(dec / f == 0)
             {
                 return index;
@@ -620,12 +624,12 @@ public class Main
     // metoda ktora uroby zo String pola int pole
     public static int[] stringArrayToIntArray(String[] array)
     {
-        int[] arrayint = new int[array.length];
+        int[] arrayInt = new int[array.length];
         for (int i = 0; i < array.length; i++)
         {
-            arrayint[i] = Integer.parseInt(array[i]);
+            arrayInt[i] = Integer.parseInt(array[i]);
         }
-        return arrayint;
+        return arrayInt;
     }
 
 }
