@@ -58,13 +58,13 @@ public class Main
                 System.out.println("Transfer from:");
                 System.out.println("    1 Binary");
                 System.out.println("    2 Decimal");
-                option1 = getNumFromTo("",1,2);			// select an option
+                option1 = getNumFromTo("From: ",1,2);			// select an option
                 System.out.println("Transfer to:");			// display will offer no possibility that was already selected
                 option2 = 0;
                 if(option1 == 2)
                 {
                     System.out.println("    1 Binary");
-                    option2 = getNumFromTo("",1,1);				// select an option
+                    option2 = getNumFromTo("To: ",1,1);				// select an option
                     switch (option2)
                     {
                         case 1:
@@ -74,7 +74,7 @@ public class Main
                 if(option1 == 1)
                 {
                     System.out.println("    1 Decimal");
-                    option2 = getNumFromTo("",1,1);				// select an option
+                    option2 = getNumFromTo("To: ",1,1);				// select an option
                     switch (option2)
                     {
                         case 1:
@@ -90,7 +90,8 @@ public class Main
                 case 1:
                     if(option2 == 2)
                     {
-                        System.out.print("Enter binary number: ");
+                       
+                    	System.out.print("Enter binary number: ");
                         int[] in = getBinNum();
                         System.out.println("The number entered in decimal is: " + fromBinToDec(in));
                     }
@@ -98,7 +99,7 @@ public class Main
                 case 2:
                     if(option2 == 1)
                     {
-                        int in = getNum("Decimal number");
+                        int in = getNum("Enter decimal number");
                         System.out.print("The number entered in binary is: ");
                         for (int x : fromDecToBin(in))
                         {
@@ -154,20 +155,20 @@ public class Main
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Mask");
                 System.out.println("    3 Wildcard");
-                option1 = getNumFromTo("",1,3);                 // select an option
+                option1 = getNumFromTo("From: ",1,3);                 // select an option
                 System.out.println("Convert to:"); 		 // display will offer no possibility that was already selected
                 option2 = 0;
                 if(option1 == 1)
                 {
                     System.out.println("    1 Mask");
                     System.out.println("    2 Wildcard");
-                    option2 = getNumFromTo("",1,2);
+                    option2 = getNumFromTo("To: ",1,2);
                 }
                 if(option1 == 2)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Wildcard");
-                    option2 = getNumFromTo("",1,2);
+                    option2 = getNumFromTo("To: ",1,2);
                     switch(option2)
                     {
                         case 1:
@@ -182,7 +183,7 @@ public class Main
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Mask");
-                    option2 = getNumFromTo("",1,2);
+                    option2 = getNumFromTo("To: ",1,2);
                     switch(option2)
                     {
                         case 1:
@@ -366,7 +367,7 @@ public class Main
                 }
                 else
                 {
-                    System.out.println("Enter the address with four octet");
+                    System.out.print("Enter the address with four octet: ");
                     continue;
                 }
             }
@@ -425,16 +426,18 @@ public class Main
     }
     public static int[] getBinNum()
     {
-        Scanner kb3 = new Scanner(System.in);
-        String in = kb3.nextLine();
-        String[] inout = new String[in.length()];
-        for (int i = 0; i < in.length(); i++)
-        {
-            String character = in.substring(i,i+1);
-            inout[i] = character;
-        }
-        return stringArrayToIntArray(inout);
+    		Scanner kb3 = new Scanner(System.in);
+	        String in = kb3.nextLine();
+	        String[] inout = new String[in.length()];
+	        for (int i = 0; i < in.length(); i++)
+	        {
+	            String character = in.substring(i,i+1);
+	            inout[i] = character;
+	        }
+	        return stringArrayToIntArray(inout);
+    	
     }
+
     // method for transfer from decimal to binary
     public static int[] fromDecToBin(int dec)
     {
