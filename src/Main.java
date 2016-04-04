@@ -58,22 +58,31 @@ public class Main
                 System.out.println("Transfer from:");
                 System.out.println("    1 Binary");
                 System.out.println("    2 Decimal");
-                option1 = getNum("");					// select an option
+                option1 = getNumFromTo("",1,2);			// select an option
                 System.out.println("Transfer to:");			// display will offer no possibility that was already selected
                 option2 = 0;
                 if(option1 == 2)
                 {
                     System.out.println("    1 Binary");
-                    option2 = kb2.nextInt();				// select an option
-                    option2 = 1;
+                    option2 = getNumFromTo("",1,1);				// select an option
+                    switch (option2)
+                    {
+                        case 1:
+                            option2 = 1;
+                    }
                 }
                 if(option1 == 1)
                 {
                     System.out.println("    1 Decimal");
-                    option2 = kb2.nextInt();				// select an option
-                    option2 = 2;
+                    option2 = getNumFromTo("",1,1);				// select an option
+                    switch (option2)
+                    {
+                        case 1:
+                            option2 = 2;
+                    }
+
                 }
-                System.out.println();
+                blank(1);
             }
 
             switch (option1)
@@ -89,18 +98,14 @@ public class Main
                 case 2:
                     if(option2 == 1)
                     {
-                        int in = getNum("decimal number");
+                        int in = getNum("Decimal number");
                         System.out.print("The number entered in binary is: ");
                         for (int x : fromDecToBin(in))
                         {
                             System.out.print(x);
                         }
                     }
-
                     break;
-                default:
-                    System.out.println("Wrong input");
-                    continue;
             }
             enterToContinue();
 
@@ -149,25 +154,20 @@ public class Main
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Mask");
                 System.out.println("    3 Wildcard");
-                option1 = kb2.nextInt();                 // select an option
+                option1 = getNumFromTo("",1,3);                 // select an option
                 System.out.println("Convert to:"); 		 // display will offer no possibility that was already selected
                 option2 = 0;
                 if(option1 == 1)
                 {
                     System.out.println("    1 Mask");
                     System.out.println("    2 Wildcard");
-                    option2 = kb2.nextInt();
-                    if (option2 < 0 && option2 > 3)
-                    {
-                        System.out.println("Wrong input");
-                        continue;
-                    }
+                    option2 = getNumFromTo("",1,2);
                 }
                 if(option1 == 2)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Wildcard");
-                    option2 = kb2.nextInt();
+                    option2 = getNumFromTo("",1,2);
                     switch(option2)
                     {
                         case 1:
@@ -176,16 +176,13 @@ public class Main
                         case 2:
                             option2 = 4;
                             break;
-                        default:
-                            System.out.println("Wrong input");
-                            continue;
                     }
                 }
                 if(option1 == 3)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Mask");
-                    option2 = kb2.nextInt();
+                    option2 = getNumFromTo("",1,2);
                     switch(option2)
                     {
                         case 1:
@@ -194,12 +191,9 @@ public class Main
                         case 2:
                             option2 = 6;
                             break;
-                        default:
-                            System.out.println("Wrong input");
-                            continue;
                     }
                 }
-                System.out.println();
+                blank(1);
             }
 
             switch (option1)
@@ -209,8 +203,7 @@ public class Main
                     {
                         while (true)
                         {
-                            System.out.print("Enter prefix: ");
-                            int in = kb2.nextInt();
+                            int in = getNum("Enter prefix: ");
                             if (in >= 0 && in <= 32)
                             {
                                 System.out.print("Mask is: ");
@@ -228,8 +221,7 @@ public class Main
                     {
                         while (true)
                         {
-                            System.out.print("Enter prefix: ");
-                            int in = kb2.nextInt();
+                            int in = getNum("Enter prefix: ");
                             if (in >= 0 && in <= 32)
                             {
                                 System.out.print("Wildcard is: ");
@@ -280,11 +272,9 @@ public class Main
                     System.out.println("Wrong input");
                     continue;
             }
-            kb2.nextLine();
-            kb2.nextLine();
+            enterToContinue();
 
-            System.out.println();
-            System.out.println();
+            blank(2);
 
             System.out.println("What do you want to do? Continue with conversion settings = Enter, New convert = 0, 1 = Menu");
             String back = kb2.nextLine();
@@ -346,8 +336,8 @@ public class Main
         writeAddress(getFirstOrLastAddress(address,prefix,false));
         System.out.println();
 
-        kb7.nextLine();
-        kb7.nextLine();
+        enterToContinue();
+        blank(2);
     }
     // method for blank lines in UI
     public static void blank(int num)
