@@ -28,17 +28,7 @@ public class Main
             System.out.println("    1 Transfer between numeral system");
             System.out.println("    2 Mask/Prefix");
             System.out.println("    3 IP Review");
-            System.out.print("Choose function: ");
-            int y;
-            try {
-                y = kb.nextInt();    // select an option
-            }
-            catch (Exception e)
-            {
-                System.out.println("Wrong input");
-                blank(2);
-                continue;
-            }
+            int y = getNumFromTo("Choose function: ",1,3);
             blank(1);
             switch (y)
             {
@@ -51,10 +41,6 @@ public class Main
                 case 3:
                     ipReviewUI();
                     break;
-                default:
-                    System.out.println("Wrong function");
-                    blank(2);
-                    continue;
             }
         }
     }
@@ -72,7 +58,7 @@ public class Main
                 System.out.println("Transfer from:");
                 System.out.println("    1 Binary");
                 System.out.println("    2 Decimal");
-                option1 = kb2.nextInt();					// select an option
+                option1 = getNum("");					// select an option
                 System.out.println("Transfer to:");			// display will offer no possibility that was already selected
                 option2 = 0;
                 if(option1 == 2)
@@ -103,8 +89,7 @@ public class Main
                 case 2:
                     if(option2 == 1)
                     {
-                        System.out.print("Enter decimal number: ");
-                        int in = kb2.nextInt();
+                        int in = getNum("decimal number");
                         System.out.print("The number entered in binary is: ");
                         for (int x : fromDecToBin(in))
                         {
@@ -117,11 +102,9 @@ public class Main
                     System.out.println("Wrong input");
                     continue;
             }
-            kb2.nextLine();
-            kb2.nextLine();
+            enterToContinue();
 
-            System.out.println();
-            System.out.println();
+            blank(2);
 
             System.out.println("What do you want to do? Continue with conversion settings = Enter, New convert = 0, 1 = Menu");
             String back = kb2.nextLine();
@@ -372,6 +355,11 @@ public class Main
         for (int i = 0; i < num;i++)
             System.out.println();
     }
+    public static void enterToContinue()
+    {
+        Scanner enter = new Scanner(System.in);
+        enter.nextLine();
+    }
     // method for get IPv4 address from user in console
 	public static int[] getAddress()
     {
@@ -399,6 +387,41 @@ public class Main
             }
         }
 
+    }
+    public static int getNum(String what)
+    {
+        int out = 0;
+        while (true)
+        {
+            Scanner kb9 = new Scanner(System.in);
+            System.out.print(what);
+            try {
+                out = kb9.nextInt();
+                break;
+            }
+            catch (Exception e)
+            {
+                System.out.print("Enter number only");
+                enterToContinue();
+            }
+
+        }
+        return out;
+    }
+    public static int getNumFromTo(String what, int from, int to)
+    {
+        int out;
+        while (true)
+        {
+            out = getNum(what);
+            if (out >= from && out <= to)
+            {
+                break;
+            }
+            else
+                System.out.println("Wrong input");
+        }
+        return out;
     }
 	// method which write address with four octet
     public static void writeAddress(int[] address)
