@@ -13,7 +13,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("Pocty v0.5");
+        System.out.println("IP Review v1.0");
         menu();
 
     }
@@ -22,13 +22,12 @@ public class Main
     {
         while (true)
         {
-            Scanner kb = new Scanner(System.in);
-
             System.out.println("Functions:");
             System.out.println("    1 Transfer between numeral system");
-            System.out.println("    2 Mask/Prefix");
+            System.out.println("    2 Mask/Prefix/Wildcard");
             System.out.println("    3 IP Review");
-            int y = getNumFromTo("Choose function: ",1,3);
+            System.out.println("    4 Author/Licence");
+            int y = getNumFromTo("Choose function: ",1,4);
             blank(1);
             switch (y)
             {
@@ -90,8 +89,7 @@ public class Main
                 case 1:
                     if(option2 == 2)
                     {
-                        System.out.print("Enter binary number: ");
-                        int[] in = getBinNum();
+                        int[] in = getBinNum("Enter binary number: ");
                         System.out.println("The number entered in decimal is: " + fromBinToDec(in));
                     }
                     break;
@@ -109,7 +107,7 @@ public class Main
             }
             enterToContinue();
 
-            blank(2);
+            blank(1);
 
             System.out.println("What do you want to do? Continue with conversion settings = Enter, New convert = 0, 1 = Menu");
             String back = kb2.nextLine();
@@ -135,8 +133,6 @@ public class Main
                 request = false;
                 continue;					// previous transfer
             }
-            System.out.println();
-            System.out.println();
         }
     }
     // method which do 2.maska/prefix
@@ -239,14 +235,12 @@ public class Main
                 case 2:
                     if(option2 == 3)
                     {
-                        System.out.print("Enter mask: ");
-                        int[] in = getAddress();
+                        int[] in = getAddress("Enter mask: ");
                         System.out.println("Prefix is: " + fromMaskToPrefix(in));
                     }
                     if(option2 == 4)
                     {
-                        System.out.print("Enter mask: ");
-                        int[] in = getAddress();
+                        int[] in = getAddress("Enter mask: ");
                         int[] out = fromMaskToWildcard(in);
                         System.out.print("Wildcard is:  ");
                         writeAddress(out);
@@ -255,14 +249,12 @@ public class Main
                 case 3:
                     if(option2 == 5)
                     {
-                        System.out.print("Enter wildcard: ");
-                        int[] in = getAddress();
+                        int[] in = getAddress("Enter wildcard: ");
                         System.out.println("Prefix is: " + fromWildcardToPrefix(in));
                     }
                     if(option2 == 6)
                     {
-                        System.out.print("Enter wildcard: ");
-                        int[] in = getAddress();
+                        int[] in = getAddress("Enter wildcard: ");
                         int[] out = fromWildcardToMask(in);
                         System.out.print("Maska is: ");
                         writeAddress(out);
@@ -274,7 +266,7 @@ public class Main
             }
             enterToContinue();
 
-            blank(2);
+            blank(1);
 
             System.out.println("What do you want to do? Continue with conversion settings = Enter, New convert = 0, 1 = Menu");
             String back = kb2.nextLine();
@@ -305,11 +297,8 @@ public class Main
     // method which do 3.IP Review
     public static void ipReviewUI()
     {
-        Scanner kb7 = new Scanner(System.in);
-        System.out.print("Enter IPv4 address: ");
-        int[] address = getAddress();					// address
-        System.out.print("Enter prefix: ");				// prefix network
-        int prefix = kb7.nextInt();
+        int[] address = getAddress("Enter IPv4 address: ");	// address
+        int prefix = getNum("Enter prefix: ");			    // prefix network
         System.out.println();
 
         System.out.print("Maska is: ");
@@ -351,14 +340,15 @@ public class Main
         enter.nextLine();
     }
     // method for get IPv4 address from user in console
-	public static int[] getAddress()
+	public static int[] getAddress(String text)
     {
-		@SuppressWarnings("resource")
 		Scanner kb = new Scanner(System.in);
         while (true)
         {
+            System.out.print(text);
             String [] inout = kb.nextLine().split("\\.");
-            try {
+            try
+            {
                 int[] address = stringArrayToIntArray(inout);
                 if(address.length == 4)
                 {
@@ -366,14 +356,14 @@ public class Main
                 }
                 else
                 {
-                    System.out.println("Enter the address with four octet");
-                    continue;
+                    System.out.print("Enter the address with four octet");
+                    enterToContinue();
                 }
             }
             catch (Exception e)
             {
-                System.out.println("Wrong input");
-                continue;
+                System.out.print("Enter number only");
+                enterToContinue();
             }
         }
 
@@ -413,6 +403,28 @@ public class Main
         }
         return out;
     }
+    public static int[] getBinNum(String text)
+    {
+        while (true)
+        {
+            System.out.print(text);
+            int[] in;
+            try {
+                in = inBinNum();
+                if (isThisBinArray(in))
+                    return in;
+                else
+                    System.out.print("Bin nunmber is composit by 0 and 1. You should keep attention on lesson.");
+                    enterToContinue();
+            }
+            catch (Exception e)
+            {
+                System.out.print("Enter 0 and 1 only");
+                enterToContinue();
+            }
+
+        }
+    }
 	// method which write address with four octet
     public static void writeAddress(int[] address)
     {
@@ -423,7 +435,7 @@ public class Main
                 System.out.print(".");
         }
     }
-    public static int[] getBinNum()
+    public static int[] inBinNum()
     {
         Scanner kb3 = new Scanner(System.in);
         String in = kb3.nextLine();
@@ -434,6 +446,15 @@ public class Main
             inout[i] = character;
         }
         return stringArrayToIntArray(inout);
+    }
+    public static boolean isThisBinArray(int[] array)
+    {
+        for (int i : array)
+        {
+            if (i != 0 && i != 1)
+                return false;
+        }
+        return true;
     }
     // method for transfer from decimal to binary
     public static int[] fromDecToBin(int dec)
