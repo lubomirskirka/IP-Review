@@ -683,7 +683,9 @@ public class Main
         System.out.println("This software is share under  Apache License Version 2.0");
         System.out.println("Full text of licence if avaible on http://www.apache.org/licenses/LICENSE-2.0");
         blank(1);
-        System.out.println("Sources avaible on ");
+        System.out.println("Sources avaible on https://github.com/lubomirskirka/IP-Review");
+        blank(1);
+        System.out.println("Latest version you can find on https://github.com/lubomirskirka/IP-Review/releases");
         enterToContinue();
         blank(2);
     }
