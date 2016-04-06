@@ -13,7 +13,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("IP Review v1.0");
+        System.out.println("IP Review");
         menu();
 
     }
@@ -26,9 +26,11 @@ public class Main
             System.out.println("    1 Transfer between numeral system");
             System.out.println("    2 Mask/Prefix/Wildcard");
             System.out.println("    3 IP Review");
-            System.out.println("    4 Author/Licence");
+            System.out.println("    4 About");
             int y = getNumFromTo("Choose function: ",1,4);
             blank(1);
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
             switch (y)
             {
                 case 1:
@@ -688,6 +690,5 @@ public class Main
         System.out.println("Latest version you can find on https://github.com/lubomirskirka/IP-Review/releases");
         enterToContinue();
         blank(2);
-    }
-
+    }   
 }
