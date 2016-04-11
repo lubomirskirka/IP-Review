@@ -29,8 +29,7 @@ public class Main
             System.out.println("    4 About");
             int y = getNumFromTo("Choose function: ",1,4);
             blank(1);
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
+            cleanConsole();
             switch (y)
             {
                 case 1:
@@ -338,6 +337,12 @@ public class Main
     {
         for (int i = 0; i < num;i++)
             System.out.println();
+    }
+    // method for clean console
+    public static void cleanConsole()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
     public static void enterToContinue()
     {
@@ -690,5 +695,5 @@ public class Main
         System.out.println("Latest version you can find on https://github.com/lubomirskirka/IP-Review/releases");
         enterToContinue();
         blank(2);
-    }   
+    }
 }
