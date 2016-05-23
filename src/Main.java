@@ -1,10 +1,22 @@
 /*
  * 
- * Autors :   Miga� �imon
- * 			  Skirka �ubom�r
- * 			  Sokol Kristi�n
- * 			  Stankovi� Tom�
- * 
+ * Copyright 2016   Migas Simon
+ * 			        Skirka Lubomir
+ * 			        Sokol Kristian
+ * 			        Stankovic Tomas
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ *
  */
 
 import java.util.Scanner;
@@ -13,6 +25,7 @@ public class Main
 {
     public static void main(String[] args)
     {
+        cleanConsole();
         System.out.println("IP Review");
         menu();
 
@@ -27,22 +40,30 @@ public class Main
             System.out.println("    2 Mask/Prefix/Wildcard");
             System.out.println("    3 IP Review");
             System.out.println("    4 About");
-            int y = getNumFromTo("Choose function: ",1,4);
+            System.out.println("    5 Exit");
+            int y = getNumFromTo("Choose function: ",1,5,"Wrong function");
             blank(1);
             cleanConsole();
             switch (y)
             {
                 case 1:
                     convertUI();
+                    cleanConsole();
                     break;
                 case 2:
                     prefixUI();
+                    cleanConsole();
                     break;
                 case 3:
                     ipReviewUI();
+                    cleanConsole();
                     break;
                 case 4:
                     aboutUI();
+                    cleanConsole();
+                    break;
+                case 5:
+                    System.exit(0);
                     break;
             }
         }
@@ -61,13 +82,13 @@ public class Main
                 System.out.println("Transfer from:");
                 System.out.println("    1 Binary");
                 System.out.println("    2 Decimal");
-                option1 = getNumFromTo("From: ",1,2);			// select an option
+                option1 = getNumFromTo("From: ",1,2,"1 or 2?");			// select an option
                 System.out.println("Transfer to:");			// display will offer no possibility that was already selected
                 option2 = 0;
                 if(option1 == 2)
                 {
                     System.out.println("    1 Binary");
-                    option2 = getNumFromTo("To: ",1,1);				// select an option
+                    option2 = getNumFromTo("To: ",1,1,"Wrong choice");	// select an option
                     switch (option2)
                     {
                         case 1:
@@ -77,7 +98,7 @@ public class Main
                 if(option1 == 1)
                 {
                     System.out.println("    1 Decimal");
-                    option2 = getNumFromTo("To: ",1,1);				// select an option
+                    option2 = getNumFromTo("To: ",1,1,"Wrong choice");				// select an option
                     switch (option2)
                     {
                         case 1:
@@ -87,7 +108,7 @@ public class Main
                 }
                 blank(1);
             }
-
+            cleanConsole();
             switch (option1)
             {
                 case 1:
@@ -100,7 +121,7 @@ public class Main
                 case 2:
                     if(option2 == 1)
                     {
-                        int in = getNum("Enter decimal number");
+                        int in = getNum("Enter decimal number: ");
                         System.out.print("The number entered in binary is: ");
                         for (int x : fromDecToBin(in))
                         {
@@ -116,8 +137,6 @@ public class Main
             System.out.println("What do you want to do? Continue with conversion settings = Enter, New convert = 0, 1 = Menu");
             String back = kb2.nextLine();
 
-
-
             try {
                 int in = Integer.parseInt(back);
                 if(in == 0)
@@ -125,16 +144,19 @@ public class Main
                 	request = true;
                     option1 = 0;
                     option2 = 0;
-                    continue;				// method are initiated from the beginning
+                    cleanConsole();
+                    continue;				// method are initiated from the
                 }
                 if (in == 1)
                 {
+                    cleanConsole();
                     break;					// end method/transfer, and the program returns to the menu
                 }
             }
             catch (Exception e)
             {
                 request = false;
+                cleanConsole();
                 continue;					// previous transfer
             }
         }
@@ -154,20 +176,20 @@ public class Main
                 System.out.println("    1 Prefix");
                 System.out.println("    2 Mask");
                 System.out.println("    3 Wildcard");
-                option1 = getNumFromTo("From: ",1,3);                 // select an option
+                option1 = getNumFromTo("From: ",1,3,"Wrong choice");                 // select an option
                 System.out.println("Convert to:"); 		 // display will offer no possibility that was already selected
                 option2 = 0;
                 if(option1 == 1)
                 {
                     System.out.println("    1 Mask");
                     System.out.println("    2 Wildcard");
-                    option2 = getNumFromTo("To: ",1,2);
+                    option2 = getNumFromTo("To: ", 1, 2, "Wrong choice");
                 }
                 if(option1 == 2)
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Wildcard");
-                    option2 = getNumFromTo("To: ",1,2);
+                    option2 = getNumFromTo("To: ", 1, 2, "Wrong choice");
                     switch(option2)
                     {
                         case 1:
@@ -182,7 +204,7 @@ public class Main
                 {
                     System.out.println("    1 Prefix");
                     System.out.println("    2 Mask");
-                    option2 = getNumFromTo("To: ",1,2);
+                    option2 = getNumFromTo("To: ", 1, 2, "Wrong choice");
                     switch(option2)
                     {
                         case 1:
@@ -193,9 +215,10 @@ public class Main
                             break;
                     }
                 }
-                blank(1);
-            }
 
+            }
+            blank(1);
+            cleanConsole();
             switch (option1)
             {
                 case 1:
@@ -203,48 +226,34 @@ public class Main
                     {
                         while (true)
                         {
-                            int in = getNum("Enter prefix: ");
-                            if (in >= 0 && in <= 32)
-                            {
+                            int in = getNumFromTo("Enter prefix: ", 1, 32, "Prefix is only from 1 to 32");
                                 System.out.print("Mask is: ");
                                 int[] mask = fromPrefixToMask(in);
                                 writeAddress(mask);
                                 break;
-                            }
-                            else
-                            {
-                                System.out.println("Wrong prefix, this prefix does not exist");
-                            }
                         }
                     }
                     if(option2 == 2)
                     {
                         while (true)
                         {
-                            int in = getNum("Enter prefix: ");
-                            if (in >= 0 && in <= 32)
-                            {
-                                System.out.print("Wildcard is: ");
-                                int[] wildcard = fromPrefixToWildcard(in);
-                                writeAddress(wildcard);
-                                break;
-                            }
-                            else
-                            {
-                                System.out.println("Wrong prefix, this prefix does not exist");
-                            }
+                            int in = getNumFromTo("Enter prefix: ", 1, 32, "Prefix is only from 1 to 32");
+                            System.out.print("Wildcard is: ");
+                            int[] wildcard = fromPrefixToWildcard(in);
+                            writeAddress(wildcard);
+                            break;
                         }
                     }
                     break;
                 case 2:
                     if(option2 == 3)
                     {
-                        int[] in = getAddress("Enter mask: ");
+                        int[] in = getMask("Enter mask: ");
                         System.out.println("Prefix is: " + fromMaskToPrefix(in));
                     }
                     if(option2 == 4)
                     {
-                        int[] in = getAddress("Enter mask: ");
+                        int[] in = getMask("Enter mask: ");
                         int[] out = fromMaskToWildcard(in);
                         System.out.print("Wildcard is:  ");
                         writeAddress(out);
@@ -282,16 +291,19 @@ public class Main
                 	request = true;
                     option1 = 0;
                     option2 = 0;
+                    cleanConsole();
                     continue;							// method are initiated from the beginning
                 }
                 if (in == 1)
                 {
+                    cleanConsole();
                     break;								// end method/transfer, and the program returns to the menu
                 }
             }
             catch (Exception e)
             {
                 request = false;
+                cleanConsole();
                 continue;                               // previous transfer
             }
             System.out.println();
@@ -302,7 +314,7 @@ public class Main
     public static void ipReviewUI()
     {
         int[] address = getAddress("Enter IPv4 address: ");	// address
-        int prefix = getNum("Enter prefix: ");			    // prefix network
+        int prefix = getNumFromTo("Enter prefix: ",1,32,"Prefix is only from 1 to 32");			    // prefix network
         System.out.println();
 
         System.out.print("Maska is: ");
@@ -344,6 +356,7 @@ public class Main
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+    //method for pause program and continuo after enter
     public static void enterToContinue()
     {
         Scanner enter = new Scanner(System.in);
@@ -356,21 +369,26 @@ public class Main
         while (true)
         {
             System.out.print(text);
-            String [] inout = kb.nextLine().split("\\.");
+            String [] inout = kb.nextLine().split("\\.");   //get adress from user and cut to index after .
             try
             {
                 int[] address = stringArrayToIntArray(inout);
-                if(address.length == 4)
+                if(address.length != 4)                    //if address havent got 4 octet
                 {
-                    return address;
+                    System.out.print("Enter the address with four octet");
+                    enterToContinue();                      //again while
+                }
+                else if(!isThisIPv4Address(address))        //if address is not address
+                {
+                    System.out.print("This is not address");
+                    enterToContinue();                      //again while
                 }
                 else
                 {
-                    System.out.print("Enter the address with four octet");
-                    enterToContinue();
+                    return address;                         //correct address is returned
                 }
             }
-            catch (Exception e)
+            catch (Exception e)                             //if user enter no number to inout
             {
                 System.out.print("Enter number only");
                 enterToContinue();
@@ -378,6 +396,57 @@ public class Main
         }
 
     }
+    //method for getMask and chceck if mask is really mask
+    public static int[] getMask(String what)
+    {
+        while (true)
+        {
+            int[] out = getAddress(what);
+            boolean isThere = true;     //in mask is right octet
+            boolean continueFor = true; //stop for ater find nex octet where
+            boolean next = true;        //next shoud be 0
+            boolean ismask = true;      //is mask, ex. 255.128.255.0 is not
+            for (int octet : out)
+            {
+                if (!next && octet != 0)
+                {
+                    ismask = false;
+                    continue;
+                }
+                for (int exponent = 7; exponent >= 0 && continueFor; exponent--) {
+                        if (!(octet == exponentiation(2, exponent) || octet == 255 || octet == 0))
+                        {
+                            isThere = false;
+                            continueFor = false;
+                        }
+                }
+                if (255 != octet)
+                {
+                    next = false;
+                }
+                continueFor = true;
+            }
+            if (!isThere || !ismask)
+            {
+                System.out.print("This is not mask");
+                enterToContinue();
+                continue;
+            }
+            else
+                return out;
+        }
+    }
+    //method for chceck is input array address
+    public static boolean isThisIPv4Address(int[] address)
+    {
+        for (int i : address)
+        {
+            if (i < 0 || i > 255)
+                return false;
+        }
+        return true;
+    }
+    //method for get int from user in console and preventing crash program for not number to int
     public static int getNum(String what)
     {
         int out = 0;
@@ -391,28 +460,36 @@ public class Main
             }
             catch (Exception e)
             {
-                System.out.print("Enter number only");
+                System.out.print("Wrong input");
                 enterToContinue();
             }
 
         }
         return out;
     }
+    //method for get int from user in console and preventing crash program for not number to int and wrong range of number to returnwith default error message
     public static int getNumFromTo(String what, int from, int to)
+    {
+        return getNumFromTo(what, from, to, "Wrong input");
+    }
+    //method for get int from user in console and preventing crash program for not number to int and wrong range of number to returnwith custom error message
+    public static int getNumFromTo(String what, int from, int to, String error)
     {
         int out;
         while (true)
         {
             out = getNum(what);
             if (out >= from && out <= to)
-            {
                 break;
-            }
             else
-                System.out.println("Wrong input");
+            {
+                System.out.print(error);
+                enterToContinue();
+            }
         }
         return out;
     }
+    //method for get bin number from user, preventing enter other num as 0, 1 and other character as num
     public static int[] getBinNum(String text)
     {
         while (true)
@@ -445,6 +522,7 @@ public class Main
                 System.out.print(".");
         }
     }
+    //part of getBinNum, get bin number from user and cut bin number in one String to String array
     public static int[] inBinNum()
     {
     		Scanner kb3 = new Scanner(System.in);
@@ -458,6 +536,7 @@ public class Main
 	        return stringArrayToIntArray(inout);
     	
     }
+    //method for chceck is array bin number
     public static boolean isThisBinArray(int[] array)
     {
         for (int i : array)
@@ -678,17 +757,27 @@ public class Main
         }
         return arrayInt;
     }
+    //UI method for about info
     public static void aboutUI()
     {
         blank(2);
         System.out.println("IP Review");
-        System.out.println("Version : 1.0");
+        System.out.println("Version : 1.0.1");
         blank(1);
-        System.out.println("Autors");
-        System.out.println("Migaš Šimon  Skirka Ľubomír Sokol Kristián Stankovič Tomáš");
+        System.out.println("Copyright 2016");
+        System.out.println("Migaš Šimon  Skirka Ľubomír  Sokol Kristián  Stankovič Tomáš");
         blank(1);
-        System.out.println("This software is share under  Apache License Version 2.0");
-        System.out.println("Full text of licence if avaible on http://www.apache.org/licenses/LICENSE-2.0");
+        System.out.println("   Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
+                "   you may not use this file except in compliance with the License.\n" +
+                "   You may obtain a copy of the License at\n" +
+                "\n" +
+                "       http://www.apache.org/licenses/LICENSE-2.0\n" +
+                "\n" +
+                "   Unless required by applicable law or agreed to in writing, software\n" +
+                "   distributed under the License is distributed on an \"AS IS\" BASIS,\n" +
+                "   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
+                "   See the License for the specific language governing permissions and\n" +
+                "   limitations under the   License.");
         blank(1);
         System.out.println("Sources avaible on https://github.com/lubomirskirka/IP-Review");
         blank(1);
