@@ -82,29 +82,80 @@ public class Main
                 System.out.println("Transfer from:");
                 System.out.println("    1 Binary");
                 System.out.println("    2 Decimal");
-                option1 = getNumFromTo("From: ",1,2,"1 or 2?");			// select an option
+                System.out.println("    3 Osm");
+                System.out.println("    4 Hexadecimal");
+                option1 = getNumFromTo("From: ",1,4,"Wrong choice");			// select an option
                 System.out.println("Transfer to:");			// display will offer no possibility that was already selected
                 option2 = 0;
-                if(option1 == 2)
-                {
-                    System.out.println("    1 Binary");
-                    option2 = getNumFromTo("To: ",1,1,"Wrong choice");	// select an option
-                    switch (option2)
-                    {
-                        case 1:
-                            option2 = 1;
-                    }
-                }
                 if(option1 == 1)
                 {
                     System.out.println("    1 Decimal");
-                    option2 = getNumFromTo("To: ",1,1,"Wrong choice");				// select an option
+                    System.out.println("    2 Osm ");
+                    System.out.println("    3 Hexadecimal");
+                    option2 = getNumFromTo("To: ",1,3,"Wrong choice");	// select an option
+//                    switch (option2)
+//                    {
+//                        case 1:
+//                            option2 = 2;
+//                    }
+                }
+                if(option1 == 2)
+                {
+                    System.out.println("    1 Binary");
+                    System.out.println("    2 Osm");
+                    System.out.println("    3 Hexadecimal");
+                    option2 = getNumFromTo("To: ",1,3,"Wrong choice");            // select an option
                     switch (option2)
                     {
                         case 1:
-                            option2 = 2;
+                            option2 = 4;
+                            break;
+                        case 2:
+                        	option2 = 5;
+                        	break;
+                        case 3:
+                        	option2 = 6;
+                        	break;
                     }
 
+                }
+                if(option1 == 3)
+                {
+                	System.out.println("    1 Binary");
+                	System.out.println("    2 Decimal");
+                	System.out.println("    3 Hexadecimal");
+                	option2 = getNumFromTo("To: ",1,3,"Wrong choice");            // select an option
+                	switch (option2)
+                	{
+                		case 1:
+                			option2 = 7;
+                			break;
+                		case 2:
+                			option2 = 8;
+                			break;
+                		case 3:
+                			option2 = 9;
+                			break;
+                	}
+                }
+                if(option1 == 4)
+                {
+                	System.out.println("    1 Binary");
+                	System.out.println("    2 Decimal");
+                	System.out.println("    3 Osm");
+                	option2 = getNumFromTo("To: ",1,3,"Wrong choice");            // select an option
+                	switch (option2)
+                	{
+                		case 1:
+                			option2 = 10;
+                			break;
+                		case 2:
+                			option2 = 11;
+                			break;
+                		case 3:
+                			option2 = 12;
+                			break;
+                	}
                 }
                 blank(1);
             }
@@ -112,23 +163,150 @@ public class Main
             switch (option1)
             {
                 case 1:
-                    if(option2 == 2)
+                    if(option2 == 1)
                     {
                         int[] in = getBinNum("Enter binary number: ");
-                        System.out.println("The number entered in decimal is: " + fromBinToDec(in));
+                        System.out.println("The number entered in decimal is: " + fromOtherToDec(in,2));
+                    }
+                    if(option2 == 2)
+                    {
+                    	int[] in = getBinNum("Enter binary number: ");
+                    	System.out.println("The number entered in osm is: ");
+                    	for(int a : fromDecToOther(fromOtherToDec(in,2),8))
+                    	{
+                    		System.out.print(a);
+                    	}
+                    }
+                    if(option2 == 3)
+                    {
+                    	int[] in = getBinNum("Enter binary number: ");
+                    	int[] hex = fromDecToOther(fromOtherToDec(in,2),16);
+                    	System.out.println("The number entered in hexadecimal is: ");
+                    	for(int a : hex)
+                    	{
+                    		if(a < 10)
+                    			System.out.print(a);
+                    		if(a == 10)
+                    			System.out.print("A");
+                    		if(a == 11)
+                    			System.out.print("B");
+                    		if(a == 12)
+                    			System.out.print("C");
+                    		if(a == 13)
+                    			System.out.print("D");
+                    		if(a == 14)
+                    			System.out.print("E");
+                    		if(a == 15)
+                    			System.out.print("F");
+                    	}
                     }
                     break;
                 case 2:
-                    if(option2 == 1)
+                    if(option2 == 4)
                     {
                         int in = getNum("Enter decimal number: ");
                         System.out.print("The number entered in binary is: ");
-                        for (int x : fromDecToBin(in))
+                        for (int x : fromDecToOther(in,2))
                         {
                             System.out.print(x);
                         }
                     }
+                    if(option2 == 5)
+                    {
+                    	int in = getNum("Enter decimal number: ");
+                    	System.out.println("The number entered in osm is: ");
+                    	for(int a : fromDecToOther(in,8))
+                    	{
+                    		System.out.print(a);
+                    	}
+                    }
+                    if(option2 == 6)
+                    {
+                    	int in = getNum("Enter decimal number: ");
+                    	int[] hex = fromDecToOther(in,16);
+                    	System.out.println("The number entered in hexadecimal is: ");
+                    	for(int a : hex)
+                    	{
+                    		if(a < 10)
+                    			System.out.print(a);
+                    		if(a == 10)
+                    			System.out.print("A");
+                    		if(a == 11)
+                    			System.out.print("B");
+                    		if(a == 12)
+                    			System.out.print("C");
+                    		if(a == 13)
+                    			System.out.print("D");
+                    		if(a == 14)
+                    			System.out.print("E");
+                    		if(a == 15)
+                    			System.out.print("F");
+                    	}
+                    }
                     break;
+                case 3:
+                	if(option2 == 7)
+                	{
+                		int[] in = getOsmNum("Enter Osm number: ");
+                		System.out.println("The entered number in binary is: ");
+                		for(int a : fromDecToOther(fromOtherToDec(in,8),2))
+                		{
+                			System.out.print(a);
+                		}
+                	}
+                	if(option2 == 8)
+                	{
+                		int[] in = getOsmNum("Enter Osm number: ");
+                		System.out.println("The entered number in decimal is: " + fromOtherToDec(in,8));
+                	}
+                	if(option2 == 9)
+                	{
+                		int[] in = getOsmNum("Enter Osm number: ");
+                		System.out.println("The entered number in hexadecimal is: ");
+                		for(int a : fromDecToOther(fromOtherToDec(in,8),16))
+                    	{
+                    		if(a < 10)
+                    			System.out.print(a);
+                    		if(a == 10)
+                    			System.out.print("A");
+                    		if(a == 11)
+                    			System.out.print("B");
+                    		if(a == 12)
+                    			System.out.print("C");
+                    		if(a == 13)
+                    			System.out.print("D");
+                    		if(a == 14)
+                    			System.out.print("E");
+                    		if(a == 15)
+                    			System.out.print("F");
+                    	}
+                	}
+                	break;
+                case 4 :
+                	if(option2 == 10)
+                	{
+                		int[] in = getHexNum();
+                		System.out.println("The entered number in binary is: ");
+                		for(int a : fromDecToOther(fromOtherToDec(in,16),2))
+                		{
+                			System.out.print(a);
+                		}
+                	}
+                	if(option2 == 11)
+                	{
+                		int[] in = getHexNum();
+                		System.out.println("The entered number in decimal is: " + fromOtherToDec(in,16));
+                	}
+                	if(option2 == 12)
+                	{
+                		int[] in = getHexNum();
+                		System.out.println("The number entered in osm is: ");
+                		for(int a : fromDecToOther(fromOtherToDec(in,16),8))
+                		{
+                			System.out.print(a);
+                		}
+                	}
+                		
             }
             enterToContinue();
 
@@ -413,7 +591,8 @@ public class Main
                     ismask = false;
                     continue;
                 }
-                for (int exponent = 7; exponent >= 0 && continueFor; exponent--) {
+                for (int exponent = 7; exponent >= 0 && continueFor; exponent--) 
+                {
                         if (!(octet == exponentiation(2, exponent) || octet == 255 || octet == 0))
                         {
                             isThere = false;
@@ -454,7 +633,8 @@ public class Main
         {
             Scanner kb9 = new Scanner(System.in);
             System.out.print(what);
-            try {
+            try
+            {
                 out = kb9.nextInt();
                 break;
             }
@@ -512,6 +692,105 @@ public class Main
 
         }
     }
+  //method for get osm number from user, preventing enter other num as 0,1,2,3,4,5,6,7 and  other character as num
+    public static int[] getOsmNum(String text)
+    {
+    	while(true)
+    	{	
+	    	System.out.println(text);
+	    	int[] in;
+	    	try
+	    	{
+	    		in = inBinNum();
+	    		if(isThisOsmArray(in))
+	    			return in;
+	    		else
+	    			System.out.print("Osm number is composit by 0,1,2,3,4,5,6 and 7. You should keep attention on lesson.");
+	    			enterToContinue();
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		System.out.print("Enter number from 0 to 7.");
+	    		enterToContinue();
+	    	}
+    	}
+    }
+  //method for get hex number from user, preventing enter other num and character as 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+    public static int[] getHexNum()
+	{
+		Scanner kb = new Scanner(System.in);
+		
+		while(true)
+		{
+			System.out.println("Enter hexadecimal number:");
+			String hex = kb.nextLine();
+			
+			if(controlInHex(hex) == false)
+			{
+				System.out.println("Wrong input.Osm number is composit by 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. You should keep attention on lesson.");
+				enterToContinue();
+			}
+			else
+			{
+				int[] a = new int[hex.length()];
+				
+				for(int i = 0; i < hex.length();i++ )
+				{
+					if(hex.charAt(i) == '0')
+						a[i] = 0;
+					if(hex.charAt(i) == '1')
+						a[i] = 1;
+					if(hex.charAt(i) == '2')
+						a[i] = 2;
+					if(hex.charAt(i) == '3')
+						a[i] = 3;
+					if(hex.charAt(i) == '4')
+						a[i] = 4;
+					if(hex.charAt(i) == '5')
+						a[i] = 5;
+					if(hex.charAt(i) == '6')
+						a[i] = 6;
+					if(hex.charAt(i) == '7')
+						a[i] = 7;
+					if(hex.charAt(i) == '8')
+						a[i] = 8;
+					if(hex.charAt(i) == '9')
+						a[i] = 9;
+					if(hex.charAt(i) == 'A')
+						a[i] = 10;
+					if(hex.charAt(i) == 'B')
+						a[i] = 11;
+					if(hex.charAt(i) == 'C')
+						a[i] = 12;
+					if(hex.charAt(i) == 'D')
+						a[i] = 13;
+					if(hex.charAt(i) == 'E')
+						a[i] = 14;
+					if(hex.charAt(i) == 'F')
+						a[i] = 15;
+					
+				}
+				return a;
+			}
+		}
+		
+	}
+    // control method with control num and char in method getHexNum
+	public static boolean controlInHex (String a)
+	{
+		int b = a.length();
+		
+		for(int i = 0;i < b;i++)
+		{
+			String ab = Character.toString(a.charAt(i));
+			
+			if(a.charAt(i) != '0' && a.charAt(i) != '1' && a.charAt(i) != '2' && a.charAt(i) != '3' && a.charAt(i) != '4' && a.charAt(i) != '5' && a.charAt(i) != '6' && a.charAt(i) != '7' && a.charAt(i) != '8' && a.charAt(i) != '9' && a.charAt(i) != 'A' && a.charAt(i) != 'B' && a.charAt(i) != 'C' && a.charAt(i) != 'D' && a.charAt(i) != 'E' && a.charAt(i) != 'F')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 	// method which write address with four octet
     public static void writeAddress(int[] address)
     {
@@ -546,18 +825,27 @@ public class Main
         }
         return true;
     }
-    // method for transfer from decimal to binary
-    public static int[] fromDecToBin(int dec)
+    public static boolean isThisOsmArray(int[] array)
     {
-        int bits = bits(dec);       // variable which is stored the number of bits of the decimal number
-        int[] bin = new int[bits];  // array where will be saved a binary number
+    	for(int i : array)
+    	{
+    		if(i < 0 && i > 7)
+    			return false;
+    	}
+    	return true;
+    }
+    // method for transfer from decimal to binary
+    public static int[] fromDecToOther(int dec,int endnumerals)
+    {
+        int bits = bits(dec,endnumerals);       // variable which is stored the number of bits of the decimal number
+        int[] finall = new int[bits];  // array where will be saved a binary number
         int rest = dec;
         for(int index = bits - 1;index >= 0;index--)	// dividing the decimal number 2
         {
-            bin[index] = rest %2;
-            rest = rest / 2;
+            finall[index] = rest %endnumerals;
+            rest = rest / endnumerals;
         }
-        return bin;
+        return finall;
     }
     /*
      *  special method for transfer from decimal to binary (8 bits)
@@ -565,7 +853,7 @@ public class Main
      */
     public static int[] fromDecToBin8(int dec)
     {
-    	int[] bin = fromDecToBin(dec);
+    	int[] bin = fromDecToOther(dec,2);
     	int[] out = new int[8];
     	int read = 0;
     	for(int i = 8 - bin.length; i < out.length; i++)
@@ -576,15 +864,15 @@ public class Main
     	return out;
     }
     // method for transfer from binary to decimal
-    public static int fromBinToDec(int[] bin)
+    public static int fromOtherToDec(int[] numerals,int startnumerals)
     {
         int dec = 0;                                // The resulting number in decimal
         int index = 0;								// array element bin
-        for(int i = bin.length - 1; i >= 0; i--)
+        for(int i = numerals.length - 1; i >= 0; i--)
         {
-            if(bin[i] == 1)
+            if(numerals[i] != 0)
             {
-                dec += exponentiation(2,index);
+                dec += exponentiation(startnumerals,index) * numerals[i];
                 index++;
             }
             else
@@ -609,7 +897,7 @@ public class Main
             {
                 activeOctet[i] = 1;
             }
-            mask[full] = fromBinToDec(activeOctet);
+            mask[full] = fromOtherToDec(activeOctet,2);
         }
 
         return mask;
@@ -620,7 +908,7 @@ public class Main
         int prefix = 0;                     			// prefix
         for(int i = 0; i < mask.length;i++)				// browse the mask octets
         {
-            int[] pole = fromDecToBin(mask[i]);			// octet of the mask converts to the binary number
+            int[] pole = fromDecToOther(mask[i],2);			// octet of the mask converts to the binary number
             for(int a = 0; a < pole.length;a++)			// cycle find out how many 1 there are in octet
             {
                 if(pole[a] == 1)
@@ -684,10 +972,10 @@ public class Main
     	changeOctet(octet4, fromThisPrefix, 4, border, net);		// change octet4
     	
     	int[] outAddress = new int[4];								// array where will be saved the resulting address
-    	outAddress[0] = fromBinToDec(octet1);						
-    	outAddress[1] = fromBinToDec(octet2);
-    	outAddress[2] = fromBinToDec(octet3);
-    	outAddress[3] = fromBinToDec(octet4);
+    	outAddress[0] = fromOtherToDec(octet1,2);						
+    	outAddress[1] = fromOtherToDec(octet2,2);
+    	outAddress[2] = fromOtherToDec(octet3,2);
+    	outAddress[3] = fromOtherToDec(octet4,2);
     	return outAddress;
     }
     // method for change octet for method getNetOrBroAddress 
@@ -733,15 +1021,15 @@ public class Main
         }
         return out;
     }
-    // method for find out number bits decimal number 
-    public static int bits(int dec)
+    // method for find out number bits entered number 
+    public static int bits(int number,int numerals)
     {
-        if (dec == 0)		// if dec = 0 binary is had 1 number-> 0 
+        if (number == 0)		// if dec = 0 binary is had 1 number-> 0 
             return 1;
         for(int index = 0;;index++)
         {
-            int f = exponentiation(2,index);   
-            if(dec / f == 0)
+            int f = exponentiation(numerals,index);   
+            if(number / f == 0)
             {
                 return index;
             }
